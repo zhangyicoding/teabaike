@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.WelcomeActivity">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/welcome_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activity.WelcomeActivity">
+        android:layout_height="match_parent" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/welcome_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <estyle.teabaike.widget.PointsView
-            android:id="@+id/points_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="@dimen/headline_titlebar_height"
-            app:pointDrawable="@drawable/selector_point"
-            app:pointMargin="@dimen/activity_horizontal_margin"
-            app:pointSize="@dimen/point_size" />
-
-    </FrameLayout>
-
-</layout>
+    <estyle.teabaike.widget.DotsView
+        android:id="@+id/dots_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dot_size"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/headline_titlebar_height"
+        app:dotMargin="@dimen/activity_horizontal_margin" />
+</FrameLayout>

@@ -8,7 +8,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // greenDAO
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
@@ -33,7 +33,6 @@ ext {
     javaVersion = JavaVersion.VERSION_1_8
     compileSdkVersion = 28
     buildToolsVersion = '28.0.3'
-    minSdkVersion = 15
+    minSdkVersion = 17
     targetSdkVersion = 28
-
 }

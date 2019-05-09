@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#008577</color>-->
-    <!--<color name="colorPrimaryDark">#00574B</color>-->
-    <!--<color name="colorAccent">#D81B60</color>-->
-
-    <color name="colorPrimary">#3D9D01</color>
-    <color name="colorPrimaryDark">#3D9D01</color>
-    <color name="colorAccent">#3D9D01</color>
+    <color name="colorPrimary">@color/tea_theme</color>
+    <color name="colorPrimaryDark">@color/tea_theme</color>
+    <color name="colorAccent">@color/tea_theme</color>
 
     <color name="tea_theme">#3D9D01</color>
-
+    <color name="white">@android:color/white</color>
+    <color name="error">@android:color/holo_red_dark</color>
     <color name="headline_titlebar_bg">#66000000</color>
 </resources>

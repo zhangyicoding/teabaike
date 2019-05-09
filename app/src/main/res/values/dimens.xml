@@ -8,6 +8,7 @@
     <dimen name="headline_height">168dp</dimen>
     <dimen name="headline_titlebar_height">28dp</dimen>
     <dimen name="titlebar_title_size">20sp</dimen>
-    <dimen name="point_size">7dp</dimen>
     <dimen name="status_bar_height">25dp</dimen>
+    <dimen name="point_size">8dp</dimen>
+    <dimen name="dot_size">8dp</dimen>
 </resources>

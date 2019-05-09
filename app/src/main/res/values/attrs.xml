@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="PointsView">
-        <attr name="pointDrawable" format="reference|color" />
-        <attr name="pointMargin" format="dimension" />
-        <attr name="pointSize" format="dimension" />
+    <declare-styleable name="DotsView">
+        <attr name="dotMargin" format="dimension" />
     </declare-styleable>
-
 </resources>

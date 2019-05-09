@@ -4,24 +4,23 @@
     <data>
 
         <variable
-            name="bean"
-            type="estyle.teabaike.bean.ContentDataBean" />
-
+            name="content"
+            type="estyle.teabaike.entity.ContentEntity.DataEntity" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.ContentActivity">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/expanded_titlebar_height"
             app:theme="@style/AppBarOverlay">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -38,7 +37,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="@{bean.source}"
+                        android:text="@{content.source}"
                         android:textColor="@android:color/white" />
 
                     <TextView
@@ -48,7 +47,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_toRightOf="@id/source_text_view"
-                        android:text="@{bean.author}"
+                        android:text="@{content.author}"
                         android:textColor="@android:color/white" />
 
                     <TextView
@@ -58,37 +57,37 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_toRightOf="@id/author_text_view"
-                        android:text="@{bean.create_time}"
+                        android:text="@{content.create_time}"
                         android:textColor="@android:color/white" />
-
                 </RelativeLayout>
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/titlebar_height"
                     android:background="@color/colorPrimary"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ToolbarPopupOverlay"
-                    app:title="@{bean.title}" />
+                    app:title="@{content.title}" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-            </android.support.design.widget.CollapsingToolbarLayout>
-
-        </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.widget.NestedScrollView
+        <estyle.teabaike.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <WebView
-                android:id="@+id/content_web_view"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:webData="@{bean.wap_content}" />
+                android:layout_height="match_parent">
 
-        </android.support.v4.widget.NestedScrollView>
-
-    </android.support.design.widget.CoordinatorLayout>
-
+                <WebView
+                    android:id="@+id/content_web_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:webData="@{content.wap_content}" />
+            </androidx.core.widget.NestedScrollView>
+        </estyle.teabaike.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
