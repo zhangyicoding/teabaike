@@ -3,11 +3,13 @@ package estyle.teabaike.api.net
 import estyle.teabaike.config.Url
 import estyle.teabaike.entity.FeedbackEntity
 import io.reactivex.Observable
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface FeedbackService {
 
-    // TODO post的写法
+    @FormUrlEncoded
     @POST(Url.FEEDBACK_URL)
-    fun postFeedback(title: String, content: String): Observable<FeedbackEntity>
+    fun postFeedback(@Field(Url.FEEDBACK_TITLE) title: String, @Field(Url.FEEDBACK_CONTENT) content: String): Observable<FeedbackEntity>
 }

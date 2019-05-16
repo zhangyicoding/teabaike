@@ -37,4 +37,6 @@ object Url {
     // 意见反馈
     const val FEEDBACK_URL =
         "api?apikey=b4f4ee31a8b9acc866ef2afb754c33e6&format=json&method=system.feedback"
+    const val FEEDBACK_TITLE = "title"
+    const val FEEDBACK_CONTENT = "content"
 }
