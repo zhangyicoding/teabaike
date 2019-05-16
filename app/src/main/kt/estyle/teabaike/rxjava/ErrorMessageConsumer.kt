@@ -4,7 +4,6 @@ import android.text.TextUtils
 import estyle.teabaike.entity.BaseEntity
 import estyle.teabaike.exception.ErrorMessageException
 import io.reactivex.functions.Consumer
-import java.util.function.Consumer
 
 class ErrorMessageConsumer<T : BaseEntity> : Consumer<T> {
     override fun accept(it: T) {

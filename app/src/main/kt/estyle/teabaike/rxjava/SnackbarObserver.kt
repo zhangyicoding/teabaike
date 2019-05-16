@@ -4,7 +4,6 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import estyle.teabaike.R
 import estyle.teabaike.exception.ErrorMessageException
-import estyle.teabaike.widget.Snackbar
 import estyle.teabaike.zhangyi.ZYLog
 
 open class SnackbarObserver<T>(
