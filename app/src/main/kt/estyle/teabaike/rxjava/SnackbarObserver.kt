@@ -3,7 +3,8 @@ package estyle.teabaike.rxjava
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import estyle.teabaike.R
-import estyle.teabaike.exception.ErrorCodeException
+import estyle.teabaike.exception.ErrorMessageException
+import estyle.teabaike.widget.Snackbar
 import estyle.teabaike.zhangyi.ZYLog
 
 open class SnackbarObserver<T>(
@@ -12,7 +13,7 @@ open class SnackbarObserver<T>(
 ) : BaseObserver<T>(view?.context, errorText) {
     override fun onError(e: Throwable) {
         view ?: return
-        if (e is ErrorCodeException) errorText = e.message
+        if (e is ErrorMessageException) errorText = e.message
         val snackbar = Snackbar.make(
             view,
             errorText ?: view.resources.getString(R.string.request_fail),

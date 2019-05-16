@@ -1,3 +1,3 @@
 package estyle.teabaike.entity
 
-class FeedbackEntity : BaseEntity()
+class FeedbackEntity(val errorCode: Int) : BaseEntity()
