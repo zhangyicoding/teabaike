@@ -6,7 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import estyle.teabaike.config.Db
 
-data class ContentEntity(val data: DataEntity) {
+data class ContentEntity(val data: DataEntity) : BaseEntity() {
 
     @Entity(tableName = Db.TABLE_COLLECTION, indices = [Index(value = ["id"], unique = true)])
     data class DataEntity(

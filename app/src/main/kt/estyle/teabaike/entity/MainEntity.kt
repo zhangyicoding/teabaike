@@ -1,6 +1,6 @@
 package estyle.teabaike.entity
 
-data class MainEntity(val data: List<DataEntity>) {
+data class MainEntity(val data: List<DataEntity>) : BaseEntity() {
 
     data class DataEntity(
         val id: String?,

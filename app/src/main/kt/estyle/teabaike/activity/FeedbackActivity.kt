@@ -48,19 +48,8 @@ class FeedbackActivity : BaseActivity(), View.OnFocusChangeListener {
             .subscribe(object : SnackbarObserver<FeedbackEntity>(binding.root) {
                 override fun onNext(it: FeedbackEntity) {
                     super.onNext(it)
-                    val msg: String
-                    val color: Int
-                    val errorCode = it.errorCode
-                    if (errorCode == 0) {
-                        msg = getString(R.string.suggestion_successful)
-                        color = R.color.colorAccent
-                        binding.text = ""
-                    } else {
-                        msg = it.errorMessage
-                        color = R.color.error
-                    }
-
-                    showTip(msg, color)
+                    showTip(getString(R.string.suggestion_successful), R.color.colorAccent)
+                    binding.text = ""
                 }
             })
     }
