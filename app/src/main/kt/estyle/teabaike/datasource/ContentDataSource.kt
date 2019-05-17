@@ -1,5 +1,6 @@
 package estyle.teabaike.datasource
 
+import estyle.base.rxjava.ErrorMessageConsumer
 import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.api.DatabaseApi
 import estyle.teabaike.api.NetApi
@@ -10,6 +11,7 @@ class ContentDataSource {
     fun loadContent(id: Long) =
         NetApi.contentService()
             .getContent(id)
+            .doOnNext(ErrorMessageConsumer())
             .map { it.data }
             .compose(SchedulersTransformer())
 
