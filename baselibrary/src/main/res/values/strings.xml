@@ -1,0 +1,5 @@
+<resources>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="request_fail">请求失败，请重试</string>
+</resources>

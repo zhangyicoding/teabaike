@@ -1,6 +1,8 @@
 package estyle.teabaike.entity
 
-data class HeadlineEntity(val data: List<DataEntity>) : BaseEntity() {
+import estyle.base.entity.NetEntity
+
+data class HeadlineEntity(val data: List<DataEntity>) : NetEntity() {
 
     data class DataEntity(
         val id: String?,

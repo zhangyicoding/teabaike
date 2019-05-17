@@ -40,14 +40,11 @@
                     android:text="@string/check_all"
                     android:textColor="@android:color/white"
                     android:visibility="invisible" />
-
             </RelativeLayout>
-
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <estyle.teabaike.widget.SwipeRefreshLayout
+    <estyle.base.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,12 +61,12 @@
                 android:layout_gravity="center"
                 android:text="@string/find_nothing" />
 
-            <estyle.teabaike.widget.RecyclerView
+            <estyle.base.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </FrameLayout>
-    </estyle.teabaike.widget.SwipeRefreshLayout>
+    </estyle.base.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/delete_btn"

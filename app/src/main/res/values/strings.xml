@@ -11,7 +11,6 @@
     <string name="no">否</string>
     <string name="loading_data">正在加载数据</string>
     <string name="find_nothing">没找到任何数据</string>
-    <string name="request_fail">请求失败，请重试</string>
     <string name="keyword">关键字</string>
     <string name="search">搜索</string>
     <string name="hot_search">热门搜索：茶</string>

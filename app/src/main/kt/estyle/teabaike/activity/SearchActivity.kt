@@ -7,11 +7,12 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import com.uber.autodispose.ObservableSubscribeProxy
+import estyle.base.BaseActivity
+import estyle.base.rxjava.DisposableConverter
+import estyle.base.rxjava.RefreshObserver
 import estyle.teabaike.R
 import estyle.teabaike.adapter.MainAdapter
 import estyle.teabaike.entity.MainEntity
-import estyle.teabaike.rxjava.DisposableConverter
-import estyle.teabaike.rxjava.RefreshObserver
 import estyle.teabaike.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
 

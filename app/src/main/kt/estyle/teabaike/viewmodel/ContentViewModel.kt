@@ -1,6 +1,7 @@
 package estyle.teabaike.viewmodel
 
 import android.app.Application
+import estyle.base.BaseViewModel
 import estyle.teabaike.datasource.ContentDataSource
 import estyle.teabaike.entity.ContentEntity
 

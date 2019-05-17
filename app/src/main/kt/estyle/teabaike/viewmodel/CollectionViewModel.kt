@@ -3,6 +3,7 @@ package estyle.teabaike.viewmodel
 import android.app.Application
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
+import estyle.base.BaseViewModel
 import estyle.teabaike.datasource.CollectionDataSource
 import estyle.teabaike.entity.ContentEntity
 import io.reactivex.Observable

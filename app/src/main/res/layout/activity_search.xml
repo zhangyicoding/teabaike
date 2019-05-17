@@ -26,15 +26,15 @@
         android:layout_gravity="center"
         android:text="@string/find_nothing" />
 
-    <estyle.teabaike.widget.SwipeRefreshLayout
+    <estyle.base.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <estyle.teabaike.widget.RecyclerView
+        <estyle.base.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </estyle.teabaike.widget.SwipeRefreshLayout>
+    </estyle.base.widget.SwipeRefreshLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,3 +1,5 @@
 package estyle.teabaike.entity
 
-class FeedbackEntity(val errorCode: Int) : BaseEntity()
+import estyle.base.entity.NetEntity
+
+class FeedbackEntity(val errorCode: Int) : NetEntity()

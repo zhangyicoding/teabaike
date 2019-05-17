@@ -6,13 +6,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import estyle.base.BasePagedListAdapter
+import estyle.base.BaseViewHolder
+import estyle.base.util.ImageUtil
 import estyle.teabaike.R
-import estyle.teabaike.adapter.viewholder.BaseViewHolder
 import estyle.teabaike.databinding.ItemMainBinding
 import estyle.teabaike.databinding.ViewHeadlineBinding
 import estyle.teabaike.entity.HeadlineEntity
 import estyle.teabaike.entity.MainEntity
-import estyle.teabaike.util.ImageUtil
 import kotlinx.android.synthetic.main.view_headline.view.*
 
 class MainAdapter :

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import com.google.android.material.navigation.NavigationView
+import estyle.base.BaseFragment
 import estyle.teabaike.R
 import estyle.teabaike.activity.CollectionActivity
 import estyle.teabaike.activity.CopyrightActivity

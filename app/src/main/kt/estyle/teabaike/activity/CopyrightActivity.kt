@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import estyle.base.BaseActivity
 import estyle.teabaike.R
 import kotlinx.android.synthetic.main.activity_copyright.*
 

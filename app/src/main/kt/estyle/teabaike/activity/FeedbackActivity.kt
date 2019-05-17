@@ -11,11 +11,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.uber.autodispose.ObservableSubscribeProxy
+import estyle.base.BaseActivity
+import estyle.base.rxjava.DisposableConverter
+import estyle.base.rxjava.SnackbarObserver
 import estyle.teabaike.R
 import estyle.teabaike.databinding.ActivityFeedbackBinding
 import estyle.teabaike.entity.FeedbackEntity
-import estyle.teabaike.rxjava.DisposableConverter
-import estyle.teabaike.rxjava.SnackbarObserver
 import estyle.teabaike.viewmodel.FeedbackViewModel
 import kotlinx.android.synthetic.main.activity_feedback.*
 

@@ -1,9 +1,10 @@
 package estyle.teabaike.datasource
 
 import androidx.paging.DataSource
+import estyle.base.BasePageKeyedDataSource
+import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.api.NetApi
 import estyle.teabaike.entity.MainEntity
-import estyle.teabaike.rxjava.SchedulersTransformer
 
 class SearchListDataSource(private val keyword: String) :
     BasePageKeyedDataSource<MainEntity.DataEntity>() {

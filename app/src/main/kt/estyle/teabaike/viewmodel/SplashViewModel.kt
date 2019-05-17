@@ -2,8 +2,9 @@ package estyle.teabaike.viewmodel
 
 import android.app.Application
 import android.content.Context
+import estyle.base.BaseViewModel
+import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.TeaBaikeApplication
-import estyle.teabaike.rxjava.SchedulersTransformer
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 

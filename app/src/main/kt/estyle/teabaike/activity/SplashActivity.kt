@@ -3,7 +3,8 @@ package estyle.teabaike.activity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import com.uber.autodispose.ObservableSubscribeProxy
-import estyle.teabaike.rxjava.DisposableConverter
+import estyle.base.BaseActivity
+import estyle.base.rxjava.DisposableConverter
 import estyle.teabaike.viewmodel.SplashViewModel
 
 class SplashActivity : BaseActivity() {

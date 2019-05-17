@@ -8,15 +8,16 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import com.uber.autodispose.ObservableSubscribeProxy
+import estyle.base.BaseActivity
+import estyle.base.rxjava.DisposableConverter
+import estyle.base.rxjava.RefreshObserver
+import estyle.base.rxjava.SnackbarObserver
+import estyle.base.widget.Snackbar
 import estyle.teabaike.R
 import estyle.teabaike.adapter.CollectionAdapter
 import estyle.teabaike.entity.ContentEntity
 import estyle.teabaike.fragment.dialog.CollectionDialogFragment
-import estyle.teabaike.rxjava.DisposableConverter
-import estyle.teabaike.rxjava.RefreshObserver
-import estyle.teabaike.rxjava.SnackbarObserver
 import estyle.teabaike.viewmodel.CollectionViewModel
-import estyle.teabaike.widget.Snackbar
 import kotlinx.android.synthetic.main.activity_collection.*
 
 class CollectionActivity : BaseActivity() {

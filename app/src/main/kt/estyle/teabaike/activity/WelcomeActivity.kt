@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+import estyle.base.BaseActivity
 import estyle.teabaike.R
 import estyle.teabaike.adapter.WelcomePagerAdapter
 import estyle.teabaike.viewmodel.SplashViewModel

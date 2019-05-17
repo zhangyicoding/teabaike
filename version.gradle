@@ -1,0 +1,26 @@
+ext {
+    javaVersion = JavaVersion.VERSION_1_8
+    compileSdkVersion = 28
+    buildToolsVersion = '28.0.3'
+    minSdkVersion = 17
+    targetSdkVersion = 28
+
+    junit_version = '4.12'
+    runner_version = '1.1.1'
+    espresso_core_version = '3.1.1'
+    core_version = '1.0.2'
+    appcompat_version = '1.0.2'
+    multidex_version = '2.0.1'
+    constraintlayout_version = '1.1.3'
+    lifecycle_version = '2.0.0'
+    paging_version = '2.1.0'
+    room_version = '2.1.0-beta01'
+    material_version = '1.0.0'
+    dagger_version = '2.21'
+    glide_version = '4.9.0'
+    retrofit_version = '2.5.0'
+    rxandroid_version = '2.1.1'
+    autodispose_version = '1.2.0'
+    leak_canary_version = '1.6.3'
+    chuck_version = '1.1.0'
+}

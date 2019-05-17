@@ -1,9 +1,9 @@
 package estyle.teabaike.datasource
 
+import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.api.DatabaseApi
 import estyle.teabaike.api.NetApi
 import estyle.teabaike.entity.ContentEntity
-import estyle.teabaike.rxjava.SchedulersTransformer
 
 class ContentDataSource {
 

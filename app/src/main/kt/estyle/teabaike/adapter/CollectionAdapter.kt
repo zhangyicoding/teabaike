@@ -3,8 +3,9 @@ package estyle.teabaike.adapter
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import estyle.base.BasePagedListAdapter
+import estyle.base.BaseViewHolder
 import estyle.teabaike.R
-import estyle.teabaike.adapter.viewholder.BaseViewHolder
 import estyle.teabaike.databinding.ItemCollectionBinding
 import estyle.teabaike.entity.ContentEntity
 import kotlinx.android.synthetic.main.item_collection.view.*

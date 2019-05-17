@@ -2,10 +2,11 @@ package estyle.teabaike.datasource
 
 import android.text.TextUtils
 import androidx.paging.DataSource
+import estyle.base.BasePageKeyedDataSource
+import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.api.NetApi
 import estyle.teabaike.config.Url
 import estyle.teabaike.entity.MainEntity
-import estyle.teabaike.rxjava.SchedulersTransformer
 import io.reactivex.Observable
 
 class MainListDataSource(private val type: String) : BasePageKeyedDataSource<MainEntity.DataEntity>() {

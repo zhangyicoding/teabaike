@@ -1,28 +1,19 @@
 package estyle.teabaike
 
-import android.app.Application
-import android.content.Context
-import androidx.multidex.MultiDex
+import estyle.base.BaseApplication
 import estyle.teabaike.api.DatabaseApi
 import estyle.teabaike.api.NetApi
 import estyle.teabaike.dagger.component.DaggerTeaBaikeComponent
 import estyle.teabaike.dagger.component.TeaBaikeComponent
-import estyle.teabaike.util.LeakUtil
 import estyle.teabaike.widget.ViewManager
 
-class TeaBaikeApplication : Application() {
-
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
-    }
+class TeaBaikeApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
 
         NetApi.init(this)
         DatabaseApi.init(this)
-        LeakUtil.init(this)
         ViewManager.init(this, R.color.colorAccent)
     }
 

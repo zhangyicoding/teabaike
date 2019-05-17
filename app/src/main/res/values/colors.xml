@@ -5,7 +5,5 @@
     <color name="colorAccent">@color/tea_theme</color>
 
     <color name="tea_theme">#3D9D01</color>
-    <color name="white">@android:color/white</color>
-    <color name="error">@android:color/holo_red_dark</color>
     <color name="headline_titlebar_bg">#66000000</color>
 </resources>

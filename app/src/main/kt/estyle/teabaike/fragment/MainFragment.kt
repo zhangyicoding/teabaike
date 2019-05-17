@@ -9,12 +9,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.uber.autodispose.ObservableSubscribeProxy
+import estyle.base.BaseFragment
+import estyle.base.rxjava.DisposableConverter
+import estyle.base.rxjava.RefreshObserver
 import estyle.teabaike.R
 import estyle.teabaike.activity.ContentActivity
 import estyle.teabaike.adapter.MainAdapter
 import estyle.teabaike.config.Url
-import estyle.teabaike.rxjava.DisposableConverter
-import estyle.teabaike.rxjava.RefreshObserver
 import estyle.teabaike.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 

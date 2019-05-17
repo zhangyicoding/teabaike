@@ -1,7 +1,7 @@
 package estyle.teabaike.datasource
 
+import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.api.NetApi
-import estyle.teabaike.rxjava.SchedulersTransformer
 
 class MainDataSource {
 

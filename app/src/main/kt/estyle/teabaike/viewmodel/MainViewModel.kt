@@ -5,6 +5,7 @@ import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
+import estyle.base.BaseViewModel
 import estyle.teabaike.config.Url
 import estyle.teabaike.datasource.MainDataSource
 import estyle.teabaike.datasource.MainListDataSource
