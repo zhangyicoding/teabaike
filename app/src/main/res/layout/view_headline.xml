@@ -25,7 +25,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:textColor="@android:color/white" />
 
-            <estyle.base.widget.DotsView
+            <estyle.teabaike.widget.DotsView
                 android:id="@+id/dots_view"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dot_size"

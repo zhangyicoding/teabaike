@@ -1,11 +1,11 @@
-package estyle.base.widget
+package estyle.teabaike.widget
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import estyle.base.R
+import estyle.teabaike.R
 
 class DotsView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
