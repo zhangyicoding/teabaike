@@ -1,14 +1,11 @@
 package estyle.teabaike.dagger.component
 
 import dagger.Component
-import estyle.teabaike.dagger.module.DataModule
-import estyle.teabaike.viewmodel.CollectionViewModel
+import estyle.teabaike.dagger.module.DataSourceModule
 import estyle.teabaike.viewmodel.ContentViewModel
-import javax.inject.Singleton
 
-@Singleton
-@Component(modules = [DataModule::class])
-interface TeaBaikeComponent {
+@Component(modules = [DataSourceModule::class])
+interface DataSourceComponent {
 
 //    fun inject(dataSource: MainListDataSource)
 //    fun inject(viewModel: MainViewModel)
@@ -17,7 +14,7 @@ interface TeaBaikeComponent {
 
 //    fun inject(dataSource: SearchListDataSource)
 
-    fun inject(viewModel: CollectionViewModel)
+//    fun inject(viewModel: CollectionViewModel)
 
 //    fun inject(activity: SplashActivity)
 
