@@ -44,10 +44,8 @@ dependencies {
 
     // Room
     kapt "androidx.room:room-compiler:${rootProject.ext.room_version}"
-
-    // Glide
-    kapt "com.github.bumptech.glide:compiler:${rootProject.ext.glide_version}"
-
+    // PermissionsDispatcher
+    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:${rootProject.ext.permissions_dispatcher_version}"
     // Dagger
     kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger_version}"
     kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.dagger_version}"

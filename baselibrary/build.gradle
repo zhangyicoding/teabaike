@@ -81,6 +81,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger_version}"
     kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.dagger_version}"
 
+    // PermissionsDispatcher
+    api "org.permissionsdispatcher:permissionsdispatcher:${rootProject.ext.permissions_dispatcher_version}"
+    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:${rootProject.ext.permissions_dispatcher_version}"
+
     // RxAndroid
     api "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxandroid_version}"
 

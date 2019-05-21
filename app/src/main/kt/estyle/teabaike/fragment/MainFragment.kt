@@ -1,6 +1,7 @@
 package estyle.teabaike.fragment
 
 
+import android.Manifest
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -18,7 +19,10 @@ import estyle.teabaike.adapter.MainAdapter
 import estyle.teabaike.config.Url
 import estyle.teabaike.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import permissions.dispatcher.NeedsPermission
+import permissions.dispatcher.RuntimePermissions
 
+@RuntimePermissions
 class MainFragment : BaseFragment() {
 
     private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
@@ -69,12 +73,16 @@ class MainFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         if (!mIsViewCreated) {
-            swipe_refresh_layout.post {
-                swipe_refresh_layout.isRefreshing = true
-                refresh()
-            }
-
+            initDataWithPermissionCheck()
             mIsViewCreated = true
+        }
+    }
+
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun initData() {
+        swipe_refresh_layout.post {
+            swipe_refresh_layout.isRefreshing = true
+            refresh()
         }
     }
 
@@ -88,6 +96,15 @@ class MainFragment : BaseFragment() {
                     empty_view.setText(R.string.request_fail)
                 }
             })
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     companion object {
