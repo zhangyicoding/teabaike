@@ -16,7 +16,7 @@ ext {
     paging_version = '2.1.0'
     room_version = '2.1.0-beta01'
     material_version = '1.0.0'
-    dagger_version = '2.21'
+    dagger_version = '2.22.1'
     glide_version = '4.9.0'
     retrofit_version = '2.5.0'
     permissions_dispatcher_version = '4.3.1'
