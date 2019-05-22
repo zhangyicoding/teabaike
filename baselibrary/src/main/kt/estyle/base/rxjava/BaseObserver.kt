@@ -4,13 +4,12 @@ import android.content.Context
 import android.widget.Toast
 import estyle.base.R
 import estyle.base.exception.ErrorMessageException
+import estyle.base.util.ToastUtil
+import estyle.base.zhangyi.ZYLog
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-open class BaseObserver<T>(
-    private val context: Context?,
-    private var errorText: String? = null
-) : Observer<T> {
+open class BaseObserver<T>(private var errorText: String? = null) : Observer<T> {
     override fun onSubscribe(d: Disposable) {
     }
 
@@ -18,14 +17,9 @@ open class BaseObserver<T>(
     }
 
     override fun onError(e: Throwable) {
-        val applicationContext = context?.applicationContext ?: return
         if (e is ErrorMessageException) errorText = e.message
-        Toast.makeText(
-            applicationContext,
-            errorText ?: applicationContext.getString(R.string.request_fail),
-            Toast.LENGTH_LONG
-        )
-            .show()
+        ZYLog.e("base observer error: $errorText")
+        ToastUtil.showLong(errorText ?: ToastUtil.context.getString(R.string.request_fail))
     }
 
     override fun onComplete() {

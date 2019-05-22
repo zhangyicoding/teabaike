@@ -6,6 +6,7 @@ import estyle.teabaike.dagger.component.DaggerDataSourceComponent
 import estyle.teabaike.dagger.module.DataSourceModule
 import estyle.teabaike.datasource.ContentDataSource
 import estyle.teabaike.entity.ContentEntity
+import estyle.teabaike.util.InjectUtil
 import javax.inject.Inject
 
 class ContentViewModel(application: Application) : BaseViewModel(application) {
@@ -14,9 +15,7 @@ class ContentViewModel(application: Application) : BaseViewModel(application) {
     lateinit var dataSource: ContentDataSource
 
     init {
-        DaggerDataSourceComponent.builder()
-            .dataSourceModule(DataSourceModule())
-            .build()
+        InjectUtil.dataSourceComponent()
             .inject(this)
     }
 

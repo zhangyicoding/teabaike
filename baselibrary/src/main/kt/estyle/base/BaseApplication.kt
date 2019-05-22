@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import estyle.base.util.LeakUtil
+import estyle.base.util.ToastUtil
 
 open class BaseApplication : Application() {
 
@@ -15,5 +16,6 @@ open class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         LeakUtil.init(this)
+        ToastUtil.init(this)
     }
 }

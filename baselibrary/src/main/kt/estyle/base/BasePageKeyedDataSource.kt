@@ -2,7 +2,9 @@ package estyle.base
 
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
+import estyle.base.rxjava.BaseObserver
 import io.reactivex.Observable
+import java.util.*
 
 abstract class BasePageKeyedDataSource<Value> : PageKeyedDataSource<Int, Value>() {
     override fun loadInitial(
@@ -32,10 +34,15 @@ abstract class BasePageKeyedDataSource<Value> : PageKeyedDataSource<Int, Value>(
     ) {
         // todo 需要自动管理生命周期
         val subscribe = getObservable(page)
-            .subscribe {
-                initialCallback?.onResult(it, null, 2)
-                afterCallback?.onResult(it, page + 1)
-            }
+            .subscribe(object : BaseObserver<List<Value>>() {
+                override fun onNext(it: List<Value>) {
+                    super.onNext(it)
+                    initialCallback?.onResult(it, null, 2)
+                    afterCallback?.onResult(it, page + 1)
+                }
+            })
+
+
     }
 
     protected abstract fun getObservable(page: Int): Observable<List<Value>>
