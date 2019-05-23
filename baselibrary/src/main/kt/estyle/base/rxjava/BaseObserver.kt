@@ -18,7 +18,9 @@ open class BaseObserver<T>(private var errorText: String? = null) : Observer<T> 
 
     override fun onError(e: Throwable) {
         if (e is ErrorMessageException) errorText = e.message
-        ZYLog.e("base observer error: $errorText")
+        for ((i, s) in e.stackTrace.withIndex()) {
+            ZYLog.e(s)
+        }
         ToastUtil.showLong(errorText ?: ToastUtil.context.getString(R.string.request_fail))
     }
 
