@@ -27,55 +27,42 @@ class MainFragment : BaseFragment() {
 
     private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
 
-    // TODO 纳尼？
-    val title by lazy { arguments!!.getString(TITLE) }
+    val title: String by lazy { arguments!!.getString(TITLE) }
     private val type by lazy { arguments!!.getString(TYPE) }
-
-    private val adapter by lazy { MainAdapter() }
-    private var mRootView: View? = null
-    private var mIsViewCreated = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        if (!mIsViewCreated) {
-            mRootView = inflater.inflate(R.layout.fragment_main, container, false)
-        }
-        return mRootView
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (!mIsViewCreated) {
-            adapter.emptyView = empty_view
-            // todo context全部改为nonnull
-            adapter.itemClickCallback = { ContentActivity.startActivity(context!!, it) }
-            recycler_view.adapter = adapter
+        val adapter = MainAdapter()
+        adapter.emptyView = empty_view
+        // todo context全部改为nonnull
+        adapter.itemClickCallback = { ContentActivity.startActivity(context!!, it) }
+        recycler_view.adapter = adapter
 
-            viewModel.mainList.observe(this, Observer { adapter.submitList(it) })
-            if (TextUtils.equals(type, Url.TYPES[0])) {
-                viewModel.headerList.observe(this, Observer {
-                    adapter.headlineList = it
-                    adapter.onHeadlineViewHolderCreatedCallback = { holder ->
-                        lifecycle.addObserver(holder)
-                    }
-                })
-            }
-            swipe_refresh_layout.setOnRefreshListener { refresh() }
+        viewModel.mainList.observe(this, Observer { adapter.submitList(it) })
+        if (TextUtils.equals(type, Url.TYPES[0])) {
+            viewModel.headerList.observe(this, Observer {
+                adapter.headlineList = it
+                adapter.onHeadlineViewHolderCreatedCallback = { holder ->
+                    lifecycle.addObserver(holder)
+                }
+            })
         }
+        swipe_refresh_layout.setOnRefreshListener { refresh() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (!mIsViewCreated) {
-            initDataWithPermissionCheck()
-            mIsViewCreated = true
-        }
+        initDataWithPermissionCheck()
     }
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -105,6 +92,12 @@ class MainFragment : BaseFragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (recycler_view.adapter as MainAdapter).emptyView = null
+        recycler_view.adapter = null
     }
 
     companion object {
