@@ -76,7 +76,8 @@ class MainFragment : BaseFragment() {
     // 数据回调
     private fun refresh() {
         viewModel.refresh(type)
-            .`as`<ObservableSubscribeProxy<MainViewModel>>(DisposableConverter.dispose(this))
+                // todo paing的datasource中已经canceled/disposed，切换其他频道crash
+//            .`as`<ObservableSubscribeProxy<MainViewModel>>(DisposableConverter.dispose(this))
             .subscribe(object : RefreshObserver<MainViewModel>(swipe_refresh_layout) {
                 override fun onError(e: Throwable) {
                     super.onError(e)
