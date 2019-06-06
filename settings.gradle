@@ -1,1 +1,1 @@
-include ':app', ':baselibrary'
+include ':app', ':baselibrary', ':lib_httpmock_annotation', ':lib_httpmock_common', ':lib_httpmock_processor', ':lib_httpmock', ':lib_httpmock_no_op'

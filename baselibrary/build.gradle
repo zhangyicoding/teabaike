@@ -6,17 +6,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compile_sdk_version
+    buildToolsVersion rootProject.ext.build_tools_version
     compileOptions {
-        sourceCompatibility rootProject.ext.javaVersion
-        targetCompatibility rootProject.ext.javaVersion
+        sourceCompatibility rootProject.ext.java_version
+        targetCompatibility rootProject.ext.java_version
     }
-
-
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.min_sdk_version
+        targetSdkVersion rootProject.ext.target_sdk_version
         versionCode 1
         versionName "1.0"
 
@@ -100,4 +98,9 @@ dependencies {
     // Chuck
     debugApi "com.readystatesoftware.chuck:library:${rootProject.ext.chuck_version}"
     releaseApi "com.readystatesoftware.chuck:library-no-op:${rootProject.ext.chuck_version}"
+
+    // HttpMock
+    debugApi project(path: ':lib_httpmock')
+    releaseApi project(path: ':lib_httpmock_no_op')
+    kaptDebug project(path: ':lib_httpmock_processor')
 }

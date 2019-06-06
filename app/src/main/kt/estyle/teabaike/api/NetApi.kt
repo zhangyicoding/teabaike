@@ -1,6 +1,8 @@
 package estyle.teabaike.api
 
 import android.content.Context
+import com.estyle.httpmock.HttpMock
+import com.estyle.httpmock.HttpMockGenerator
 import com.readystatesoftware.chuck.ChuckInterceptor
 import estyle.teabaike.api.net.ContentService
 import estyle.teabaike.api.net.FeedbackService
@@ -19,10 +21,13 @@ object NetApi {
     private lateinit var retrofit: Retrofit
 
     fun init(context: Context) {
-        val client = OkHttpClient.Builder()
+        val builder = OkHttpClient.Builder()
             .cache(Cache(File(context.externalCacheDir, "http_cache"), 10 * 1024 * 1024))
             .addInterceptor(ChuckInterceptor(context))
-            .build()
+
+        val client =
+            HttpMock.addHttpMockInterceptor(context, builder, HttpMockGenerator::class.java, true)
+                .build()
 
         retrofit = Retrofit.Builder()
             .baseUrl(Url.BASE_URL)
