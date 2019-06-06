@@ -1,5 +1,6 @@
 package estyle.teabaike.api.net
 
+import com.estyle.httpmock.annotation.HttpMock
 import estyle.teabaike.config.Url
 import estyle.teabaike.entity.MainEntity
 import io.reactivex.Observable
@@ -8,6 +9,7 @@ import retrofit2.http.Query
 
 interface SearchService {
 
+    @HttpMock(fileName = "list.json")
     @GET(Url.SEARCH_URL)
     fun getSearch(@Query(Url.SEARCH) keyword: String, @Query(Url.PAGE) page: Int): Observable<MainEntity>
 }
