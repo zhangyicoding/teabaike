@@ -15,10 +15,11 @@ import okhttp3.OkHttpClient;
 public class HttpMock {
 
     public static OkHttpClient.Builder addHttpMockInterceptor(
-            Context context,
             OkHttpClient.Builder builder,
-            Class<? extends AbstractHttpMockGenerator> generatorClass,
-            boolean enable
+            Context context,
+            boolean enable,
+            long delayMillis,
+            Class<? extends AbstractHttpMockGenerator> generatorClass
     ) {
         AbstractHttpMockGenerator generator = null;
         try {
@@ -30,6 +31,6 @@ public class HttpMock {
         Type type = new TypeToken<List<MockEntity>>() {
         }.getType();
         List<MockEntity> mockList = new Gson().fromJson(json, type);
-        return builder.addInterceptor(new HttpMockInterceptor(context, mockList, enable));
+        return builder.addInterceptor(new HttpMockInterceptor(context, mockList, enable, delayMillis));
     }
 }

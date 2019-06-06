@@ -5,7 +5,6 @@ import com.estyle.httpmock.common.AbstractHttpMockGenerator;
 import com.estyle.httpmock.common.MockEntity;
 import com.google.auto.service.AutoService;
 import com.google.gson.Gson;
-import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;

@@ -25,9 +25,14 @@ object NetApi {
             .cache(Cache(File(context.externalCacheDir, "http_cache"), 10 * 1024 * 1024))
             .addInterceptor(ChuckInterceptor(context))
 
-        val client =
-            HttpMock.addHttpMockInterceptor(context, builder, HttpMockGenerator::class.java, true)
-                .build()
+        val client = HttpMock.addHttpMockInterceptor(
+            builder,
+            context,
+            true,
+            3500L,
+            HttpMockGenerator::class.java
+        )
+            .build()
 
         retrofit = Retrofit.Builder()
             .baseUrl(Url.BASE_URL)
