@@ -9,7 +9,7 @@ import androidx.paging.PagedList
 import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
-import estyle.base.rxjava.RefreshObserver
+import estyle.base.rxjava.observer.RefreshObserver
 import estyle.teabaike.R
 import estyle.teabaike.adapter.MainAdapter
 import estyle.teabaike.entity.MainEntity

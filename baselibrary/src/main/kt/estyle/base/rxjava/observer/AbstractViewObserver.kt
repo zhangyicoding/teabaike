@@ -1,4 +1,4 @@
-package estyle.base.rxjava
+package estyle.base.rxjava.observer
 
 import android.view.View
 

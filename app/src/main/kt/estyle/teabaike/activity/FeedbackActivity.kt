@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.fragment.dialog.ProgressDialogFragment
-import estyle.base.rxjava.DialogObserver
+import estyle.base.rxjava.observer.DialogObserver
 import estyle.base.rxjava.DisposableConverter
 import estyle.teabaike.R
 import estyle.teabaike.databinding.ActivityFeedbackBinding

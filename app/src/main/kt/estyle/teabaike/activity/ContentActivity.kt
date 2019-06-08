@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
-import estyle.base.rxjava.RefreshObserver
-import estyle.base.rxjava.SnackbarObserver
+import estyle.base.rxjava.observer.RefreshObserver
+import estyle.base.rxjava.observer.SnackbarObserver
 import estyle.base.widget.Snackbar
 import estyle.teabaike.R
 import estyle.teabaike.databinding.ActivityContentBinding
