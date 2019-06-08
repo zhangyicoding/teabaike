@@ -1,4 +1,4 @@
-package estyle.base
+package estyle.base.fragment
 
 import androidx.fragment.app.Fragment
 

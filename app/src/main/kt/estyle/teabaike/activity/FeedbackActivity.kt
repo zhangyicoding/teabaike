@@ -12,8 +12,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
+import estyle.base.fragment.dialog.ProgressDialogFragment
+import estyle.base.rxjava.DialogObserver
 import estyle.base.rxjava.DisposableConverter
-import estyle.base.rxjava.SnackbarObserver
 import estyle.teabaike.R
 import estyle.teabaike.databinding.ActivityFeedbackBinding
 import estyle.teabaike.entity.FeedbackEntity
@@ -24,6 +25,7 @@ class FeedbackActivity : BaseActivity(), View.OnFocusChangeListener {
 
     private lateinit var binding: ActivityFeedbackBinding
     private val viewModel by lazy { ViewModelProviders.of(this)[FeedbackViewModel::class.java] }
+    private val progressDialog by lazy { ProgressDialogFragment.newInstacne() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +46,10 @@ class FeedbackActivity : BaseActivity(), View.OnFocusChangeListener {
 
     // 反馈回调
     private fun feedback(title: String, content: String) {
+        progressDialog.show(supportFragmentManager, null)
         viewModel.feedback(title, content)
             .`as`<ObservableSubscribeProxy<FeedbackEntity>>(DisposableConverter.dispose(this))
-            .subscribe(object : SnackbarObserver<FeedbackEntity>(binding.root) {
+            .subscribe(object : DialogObserver<FeedbackEntity>(progressDialog) {
                 override fun onNext(it: FeedbackEntity) {
                     super.onNext(it)
                     showTip(getString(R.string.suggestion_successful), R.color.colorAccent)

@@ -5,21 +5,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 open class RefreshObserver<T>(
     private val swipeRefreshLayout: SwipeRefreshLayout?,
     errorText: String? = null
-) :
-    SnackbarObserver<T>(swipeRefreshLayout, errorText) {
+) : AbstractViewObserver<T>(swipeRefreshLayout, errorText) {
 
-    override fun onNext(it: T) {
+    override fun gone() {
         swipeRefreshLayout?.isRefreshing = false
-        super.onNext(it)
-    }
-
-    override fun onError(e: Throwable) {
-        swipeRefreshLayout?.isRefreshing = false
-        super.onError(e)
-    }
-
-    override fun onComplete() {
-        swipeRefreshLayout?.isRefreshing = false
-        super.onComplete()
     }
 }

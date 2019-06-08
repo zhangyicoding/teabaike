@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.uber.autodispose.ObservableSubscribeProxy
-import estyle.base.BaseFragment
+import estyle.base.fragment.BaseFragment
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.RefreshObserver
 import estyle.teabaike.R
