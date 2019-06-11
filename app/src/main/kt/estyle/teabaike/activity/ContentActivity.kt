@@ -16,6 +16,7 @@ import estyle.base.widget.Snackbar
 import estyle.teabaike.R
 import estyle.teabaike.databinding.ActivityContentBinding
 import estyle.teabaike.entity.ContentEntity
+import estyle.teabaike.fragment.dialog.ShareDialogFragment
 import estyle.teabaike.viewmodel.ContentViewModel
 import kotlinx.android.synthetic.main.activity_content.*
 import java.lang.reflect.Method
@@ -23,6 +24,12 @@ import java.lang.reflect.Method
 class ContentActivity : BaseActivity() {
 
     private val id by lazy { intent.getLongExtra("id", 0) }
+
+    private val shareDialog by lazy {
+        ShareDialogFragment.newInstance().apply {
+            channelCallback = { showTip("$it${getString(R.string.share_successful)}") }
+        }
+    }
 
     // TODO 此处使用val不可以懒加载
     // 但是在HeadlineHeaderView中就可以
@@ -73,7 +80,7 @@ class ContentActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.share_item -> share()
+            R.id.share_item -> shareDialog.show(supportFragmentManager, null)
             R.id.collect_item -> collect()
             android.R.id.home -> finish()
         }
@@ -91,11 +98,6 @@ class ContentActivity : BaseActivity() {
                     showTip(getString(R.string.collect_successful))
                 }
             })
-    }
-
-    // 分享文章
-    private fun share() {
-        showTip(getString(R.string.share_successful))
     }
 
     // 展示Snackbar
