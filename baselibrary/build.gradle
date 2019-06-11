@@ -101,6 +101,6 @@ dependencies {
 
     // HttpMock
     debugApi project(path: ':lib_httpmock')
-    releaseApi project(path: ':lib_httpmock_no_op')
+    releaseApi project(path: ':lib_httpmock_no_op_ktx')
     kaptDebug project(path: ':lib_httpmock_processor')
 }
