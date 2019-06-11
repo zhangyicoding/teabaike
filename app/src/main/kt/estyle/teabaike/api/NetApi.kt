@@ -29,7 +29,7 @@ object NetApi {
             builder,
             context,
             true,
-            3500L,
+            0L,
             HttpMockGenerator::class.java
         )
             .build()

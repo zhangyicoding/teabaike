@@ -65,7 +65,10 @@ class MainFragment : BaseFragment() {
         initDataWithPermissionCheck()
     }
 
-    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    @NeedsPermission(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
     fun initData() {
         swipe_refresh_layout.post {
             swipe_refresh_layout.isRefreshing = true
