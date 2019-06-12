@@ -22,7 +22,6 @@
     <string name="suggestion_successful">发表成功！</string>
     <string name="collect_successful">收藏成功</string>
     <string name="collect_failure">重复收藏失败</string>
-    <string name="share_successful">分享成功</string>
     <string name="check_all">全选</string>
     <string name="uncheck_all">取消</string>
     <string name="revoke">撤销</string>

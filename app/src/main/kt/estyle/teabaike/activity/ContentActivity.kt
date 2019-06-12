@@ -24,10 +24,11 @@ import java.lang.reflect.Method
 class ContentActivity : BaseActivity() {
 
     private val id by lazy { intent.getLongExtra("id", 0) }
+    private var shareContent: String? = null
 
     private val shareDialog by lazy {
-        ShareDialogFragment.newInstance().apply {
-            channelCallback = { showTip("$it${getString(R.string.share_successful)}") }
+        ShareDialogFragment.newInstance(shareContent).apply {
+            shareCallback = { showTip("${getString(R.string.share)}$it") }
         }
     }
 
@@ -63,6 +64,7 @@ class ContentActivity : BaseActivity() {
                 override fun onNext(it: ContentEntity.DataEntity) {
                     super.onNext(it)
                     binding.content = it
+                    shareContent = it.weiboUrl
                 }
             })
     }

@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import estyle.teabaike.R
 import kotlinx.android.synthetic.main.dialog_share.*
 
 class ShareDialogFragment : BottomSheetDialogFragment() {
 
-    var channelCallback: ((channel: String) -> Unit)? = null
+    var shareCallback: ((state: String) -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,12 +31,18 @@ class ShareDialogFragment : BottomSheetDialogFragment() {
 
     private fun click(v: View) {
         if (v.id != R.id.cancel_text_view) {
-            channelCallback?.invoke((v as TextView).text.toString())
+            shareCallback?.invoke(STATE_SUCCESS)
         }
         dismiss()
     }
 
     companion object {
-        fun newInstance() = ShareDialogFragment()
+        const val STATE_SUCCESS = "成功"
+        const val STATE_FAIL = "失败"
+        const val STATE_CANCEL = "取消"
+
+        fun newInstance(content: String?) = ShareDialogFragment().apply {
+            arguments = Bundle().apply { putString("content", content) }
+        }
     }
 }
