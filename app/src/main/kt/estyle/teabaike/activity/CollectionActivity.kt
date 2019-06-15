@@ -16,7 +16,7 @@ import estyle.base.widget.Snackbar
 import estyle.teabaike.R
 import estyle.teabaike.adapter.CollectionAdapter
 import estyle.teabaike.entity.ContentEntity
-import estyle.teabaike.fragment.dialog.CollectionDialogFragment
+import estyle.teabaike.fragment.dialog.DeleteCollectionDialogFragment
 import estyle.teabaike.viewmodel.CollectionViewModel
 import kotlinx.android.synthetic.main.activity_collection.*
 
@@ -30,7 +30,7 @@ class CollectionActivity : BaseActivity() {
     private var mIsDeleteEnabled: Boolean = false
 
     private val deleteDialog by lazy {
-        CollectionDialogFragment.newInstance().apply {
+        DeleteCollectionDialogFragment.newInstance().apply {
             positiveCallback = { deleteItems() }
         }
     }

@@ -29,4 +29,11 @@ class MainListDataSource(private val type: String) :
         override fun create(): DataSource<Int, MainEntity.DataEntity> =
             MainListDataSource(type)
     }
+
+    fun loadHeadline() =
+        NetApi.mainService()
+            .getHeadline()
+            .doOnNext(ErrorMessageConsumer())
+            .map { it.data }
+            .compose(SchedulersTransformer())
 }

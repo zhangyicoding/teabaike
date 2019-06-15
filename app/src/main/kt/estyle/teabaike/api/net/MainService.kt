@@ -4,6 +4,7 @@ import com.estyle.httpmock.annotation.HttpMock
 import estyle.teabaike.config.Url
 import estyle.teabaike.entity.HeadlineEntity
 import estyle.teabaike.entity.MainEntity
+import estyle.teabaike.entity.VersionEntity
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -21,4 +22,8 @@ interface MainService {
     @HttpMock(fileName = "headline.json")
     @GET(Url.HEADLINE_HEADER_URL)
     fun getHeadline(): Observable<HeadlineEntity>
+
+    @HttpMock(fileName = "version.json")
+    @GET(Url.CHECK_VERSION_URL)
+    fun getLatestVersion(): Observable<VersionEntity>
 }

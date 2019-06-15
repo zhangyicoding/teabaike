@@ -17,7 +17,7 @@ import estyle.teabaike.R
 import estyle.teabaike.activity.ContentActivity
 import estyle.teabaike.adapter.MainAdapter
 import estyle.teabaike.config.Url
-import estyle.teabaike.viewmodel.MainViewModel
+import estyle.teabaike.viewmodel.MainListViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
@@ -25,7 +25,7 @@ import permissions.dispatcher.RuntimePermissions
 @RuntimePermissions
 class MainFragment : BaseFragment() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProviders.of(this)[MainListViewModel::class.java] }
 
     val title: String by lazy { arguments!!.getString(TITLE) }
     private val type by lazy { arguments!!.getString(TYPE) }
@@ -79,9 +79,9 @@ class MainFragment : BaseFragment() {
     // 数据回调
     private fun refresh() {
         viewModel.refresh(type)
-                // todo paing的datasource中已经canceled/disposed，切换其他频道crash
-            .`as`<ObservableSubscribeProxy<MainViewModel>>(DisposableConverter.dispose(this))
-            .subscribe(object : RefreshObserver<MainViewModel>(swipe_refresh_layout) {
+            // todo paging的datasource中已经canceled/disposed，切换其他频道crash
+            .`as`<ObservableSubscribeProxy<MainListViewModel>>(DisposableConverter.dispose(this))
+            .subscribe(object : RefreshObserver<MainListViewModel>(swipe_refresh_layout) {
                 override fun onError(e: Throwable) {
                     super.onError(e)
                     empty_view.setText(R.string.request_fail)

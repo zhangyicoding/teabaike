@@ -6,9 +6,9 @@ import estyle.teabaike.api.NetApi
 
 class MainDataSource {
 
-    fun loadHeadline() =
+    fun checkVersion() =
         NetApi.mainService()
-            .getHeadline()
+            .getLatestVersion()
             .doOnNext(ErrorMessageConsumer())
             .map { it.data }
             .compose(SchedulersTransformer())

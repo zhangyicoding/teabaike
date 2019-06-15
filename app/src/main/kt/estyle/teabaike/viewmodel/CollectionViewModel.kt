@@ -6,11 +6,19 @@ import androidx.paging.RxPagedListBuilder
 import estyle.base.BaseViewModel
 import estyle.teabaike.datasource.CollectionDataSource
 import estyle.teabaike.entity.ContentEntity
+import estyle.teabaike.util.InjectUtil
 import io.reactivex.Observable
+import javax.inject.Inject
 
 class CollectionViewModel(application: Application) : BaseViewModel(application) {
 
-    val dataSource by lazy { CollectionDataSource() }
+    @Inject
+    lateinit var dataSource: CollectionDataSource
+
+    init {
+        InjectUtil.dataSourceComponent()
+            .inject(this)
+    }
 
     private var collectionListBuilder: RxPagedListBuilder<Int, ContentEntity.DataEntity>? = null
 

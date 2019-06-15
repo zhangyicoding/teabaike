@@ -3,10 +3,10 @@ package estyle.teabaike.fragment.dialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
+import estyle.base.fragment.dialog.BaseDialogFragment
 import estyle.teabaike.R
 
-class CollectionDialogFragment : DialogFragment() {
+class DeleteCollectionDialogFragment : BaseDialogFragment() {
 
     var positiveCallback: (() -> Unit)? = null
 
@@ -18,7 +18,7 @@ class CollectionDialogFragment : DialogFragment() {
             .create()
 
     companion object {
-        fun newInstance() = CollectionDialogFragment()
+        fun newInstance() = DeleteCollectionDialogFragment()
     }
 }
 
