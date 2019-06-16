@@ -1,11 +1,8 @@
 package estyle.teabaike.datasource
 
-import androidx.paging.DataSource
-import estyle.base.BasePageKeyedDataSource
 import estyle.base.rxjava.ErrorMessageConsumer
 import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.api.NetApi
-import estyle.teabaike.entity.MainEntity
 
 class SearchDataSource {
 
