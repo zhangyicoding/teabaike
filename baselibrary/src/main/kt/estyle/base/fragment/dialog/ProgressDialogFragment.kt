@@ -12,6 +12,6 @@ class ProgressDialogFragment : BaseDialogFragment() {
     }
 
     companion object {
-        fun newInstacne() = ProgressDialogFragment()
+        fun newInstance() = ProgressDialogFragment()
     }
 }

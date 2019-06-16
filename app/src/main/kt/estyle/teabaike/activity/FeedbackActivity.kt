@@ -25,7 +25,7 @@ class FeedbackActivity : BaseActivity(), View.OnFocusChangeListener {
 
     private lateinit var binding: ActivityFeedbackBinding
     private val viewModel by lazy { ViewModelProviders.of(this)[FeedbackViewModel::class.java] }
-    private val progressDialog by lazy { ProgressDialogFragment.newInstacne() }
+    private val progressDialog by lazy { ProgressDialogFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

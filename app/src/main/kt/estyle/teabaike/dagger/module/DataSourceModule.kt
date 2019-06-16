@@ -17,13 +17,19 @@ class DataSourceModule {
     @Singleton
     @Provides
     fun provideMainListDataSource(): MainListDataSource {
-        return MainListDataSource("todo")
+        return MainListDataSource()
     }
 
     @Singleton
     @Provides
     fun provideContentDataSource(): ContentDataSource {
         return ContentDataSource()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSearchDataSource(): SearchDataSource {
+        return SearchDataSource()
     }
 
     @Singleton

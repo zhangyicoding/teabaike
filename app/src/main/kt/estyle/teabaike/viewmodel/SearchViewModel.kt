@@ -1,28 +1,29 @@
 package estyle.teabaike.viewmodel
 
 import android.app.Application
-import androidx.paging.PagedList
-import androidx.paging.RxPagedListBuilder
 import estyle.base.BaseViewModel
-import estyle.teabaike.datasource.SearchListDataSource
+import estyle.teabaike.datasource.SearchDataSource
 import estyle.teabaike.entity.MainEntity
+import estyle.teabaike.util.InjectUtil
 import io.reactivex.Observable
+import javax.inject.Inject
 
 class SearchViewModel(application: Application) : BaseViewModel(application) {
 
-    private var searchListBuilder: RxPagedListBuilder<Int, MainEntity.DataEntity>? = null
+    private var page = 1
 
-    fun refresh(keyword: String): Observable<PagedList<MainEntity.DataEntity>> {
-        if (searchListBuilder == null) {
-            searchListBuilder = RxPagedListBuilder(
-                SearchListDataSource.Factory(keyword),
-                PagedList.Config.Builder()
-                    .setInitialLoadSizeHint(10)
-                    .setPageSize(10)
-                    .build()
-            )
-        }
-        return searchListBuilder!!.buildObservable()
+    @Inject
+    lateinit var dataSource: SearchDataSource
+
+    init {
+        InjectUtil.dataSourceComponent()
+            .inject(this)
     }
 
+    fun refresh(keyword: String): Observable<List<MainEntity.DataEntity>> {
+        page = 1
+        return dataSource.loadList(keyword, page)
+    }
+
+    fun load(keyword: String) = dataSource.loadList(keyword, page++)
 }

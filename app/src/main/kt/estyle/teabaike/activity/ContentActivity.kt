@@ -110,6 +110,7 @@ class ContentActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        swipe_refresh_layout.setOnRefreshListener(null)
         content_web_view.removeAllViews()
         content_web_view.destroy()
     }

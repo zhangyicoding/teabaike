@@ -42,14 +42,14 @@ class CollectionActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         adapter.emptyView = empty_view
-        adapter.itemClickCallback = { position, id ->
+        adapter.onItemClickListener = { position, id ->
             if (!mIsDeleteEnabled) {
                 ContentActivity.startActivity(this, id)
             } else {
                 adapter.invertItemStateAtPosition(position)
             }
         }
-        adapter.itemLongClickCallback = { position ->
+        adapter.onItemLongClickListener = { position, id ->
             if (!mIsDeleteEnabled) {
                 adapter.invertItemStateAtPosition(position)
                 setDeleteEnabled(true)
@@ -145,6 +145,11 @@ class CollectionActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        swipe_refresh_layout.setOnRefreshListener(null)
     }
 
     companion object {

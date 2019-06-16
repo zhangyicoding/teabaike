@@ -17,10 +17,10 @@ import javax.inject.Inject
 
 class MainListViewModel(application: Application) : BaseViewModel(application) {
 
-    val headerList by lazy { MutableLiveData<List<HeadlineEntity.DataEntity>>() }
-    val mainList by lazy { MutableLiveData<PagedList<MainEntity.DataEntity>>() }
+    val refreshHeadlineList by lazy { MutableLiveData<List<HeadlineEntity.DataEntity>>() }
+    val refreshMainList by lazy { MutableLiveData<List<MainEntity.DataEntity>>() }
 
-    private var mainListBuilder: RxPagedListBuilder<Int, MainEntity.DataEntity>? = null
+    private var page = 1
 
     @Inject
     lateinit var dataSource: MainListDataSource
@@ -31,31 +31,24 @@ class MainListViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun refresh(type: String): Observable<MainListViewModel> {
+        page = 1
         val observable = if (TextUtils.equals(type, Url.TYPES[0]))
-            Observable.mergeDelayError(loadData(type), loadHead())
+            Observable.mergeDelayError(loadHeadline(), refreshList(type, page))
         else
-            loadData(type)
+            refreshList(type, page)
 
         return observable.map { this }
     }
 
-    // 加载数据
-    private fun loadData(type: String): Observable<PagedList<MainEntity.DataEntity>> {
-        if (mainListBuilder == null) {
-            mainListBuilder = RxPagedListBuilder(
-                MainListDataSource.Factory(type),
-                PagedList.Config.Builder()
-                    .setInitialLoadSizeHint(10)
-                    .setPageSize(10)
-                    .build()
-            )
-        }
-        return mainListBuilder!!.buildObservable()
-            .doOnNext { mainList.value = it }
-    }
+    fun load(type: String) = loadList(type, page++)
 
-    // 加载头数据
-    private fun loadHead() =
+    private fun loadList(type: String, page: Int) = dataSource.loadList(type, page)
+
+    private fun refreshList(type: String, page: Int) =
+        loadList(type, page)
+            .doOnNext { refreshMainList.value = it }
+
+    private fun loadHeadline() =
         dataSource.loadHeadline()
-            .doOnNext { headerList.value = it }
+            .doOnNext { refreshHeadlineList.value = it }
 }

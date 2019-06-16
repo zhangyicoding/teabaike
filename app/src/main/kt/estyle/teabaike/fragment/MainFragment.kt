@@ -13,19 +13,23 @@ import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.fragment.BaseFragment
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
+import estyle.base.rxjava.observer.SnackbarObserver
+import estyle.base.widget.PagingRecyclerView
 import estyle.teabaike.R
 import estyle.teabaike.activity.ContentActivity
-import estyle.teabaike.adapter.MainAdapter
+import estyle.teabaike.adapter.MainListAdapter
 import estyle.teabaike.config.Url
+import estyle.teabaike.entity.MainEntity
 import estyle.teabaike.viewmodel.MainListViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 
 @RuntimePermissions
-class MainFragment : BaseFragment() {
+class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
 
     private val viewModel by lazy { ViewModelProviders.of(this)[MainListViewModel::class.java] }
+    private lateinit var adapter: MainListAdapter
 
     val title: String by lazy { arguments!!.getString(TITLE) }
     private val type by lazy { arguments!!.getString(TYPE) }
@@ -41,27 +45,28 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MainAdapter()
+        adapter = MainListAdapter()
         adapter.emptyView = empty_view
         // todo context全部改为nonnull
-        adapter.itemClickCallback = { ContentActivity.startActivity(context!!, it) }
+        adapter.onItemClickListener =
+            { position, id -> ContentActivity.startActivity(context!!, id) }
         recycler_view.adapter = adapter
+        recycler_view.setOnLoadListener(this)
+        swipe_refresh_layout.setOnRefreshListener { refresh() }
 
-        viewModel.mainList.observe(this, Observer { adapter.submitList(it) })
+        viewModel.refreshMainList.observe(this, Observer { adapter.refresh(it) })
         if (TextUtils.equals(type, Url.TYPES[0])) {
-            viewModel.headerList.observe(this, Observer {
+            viewModel.refreshHeadlineList.observe(this, Observer {
                 adapter.headlineList = it
                 adapter.onHeadlineViewHolderCreatedCallback = { holder ->
                     lifecycle.addObserver(holder)
                 }
             })
         }
-        swipe_refresh_layout.setOnRefreshListener { refresh() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         initDataWithPermissionCheck()
     }
 
@@ -76,10 +81,32 @@ class MainFragment : BaseFragment() {
         }
     }
 
-    // 数据回调
+    // PagingRecyclerView
+    override fun onLoad() {
+        viewModel.load(type)
+            .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
+                DisposableConverter.dispose(
+                    this
+                )
+            )
+            .subscribe(object : SnackbarObserver<List<MainEntity.DataEntity>>(recycler_view) {
+
+                override fun onNext(it: List<MainEntity.DataEntity>) {
+                    super.onNext(it)
+                    adapter.load(it)
+                    recycler_view.isLoading = false
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    recycler_view.isLoading = false
+                }
+            })
+    }
+
+    // SwipeRefreshLayout
     private fun refresh() {
         viewModel.refresh(type)
-            // todo paging的datasource中已经canceled/disposed，切换其他频道crash
             .`as`<ObservableSubscribeProxy<MainListViewModel>>(DisposableConverter.dispose(this))
             .subscribe(object : RefreshObserver<MainListViewModel>(swipe_refresh_layout) {
                 override fun onError(e: Throwable) {
@@ -100,7 +127,9 @@ class MainFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        (recycler_view.adapter as MainAdapter).emptyView = null
+        swipe_refresh_layout.setOnRefreshListener(null)
+        recycler_view.setOnLoadListener(null)
+        (recycler_view.adapter as MainListAdapter).emptyView = null
         recycler_view.adapter = null
     }
 

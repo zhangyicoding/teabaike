@@ -7,18 +7,12 @@ import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.api.NetApi
 import estyle.teabaike.entity.MainEntity
 
-class SearchListDataSource(private val keyword: String) :
-    BasePageKeyedDataSource<MainEntity.DataEntity>() {
+class SearchDataSource {
 
-    override fun getObservable(page: Int) =
+    fun loadList(keyword: String, page: Int) =
         NetApi.searchService()
             .getSearch(keyword, page)
             .doOnNext(ErrorMessageConsumer())
             .map { it.data }
             .compose(SchedulersTransformer())
-
-    class Factory(val keyword: String) : BasePageKeyedDataSource.Factory<MainEntity.DataEntity>() {
-        override fun create(): DataSource<Int, MainEntity.DataEntity> =
-            SearchListDataSource(keyword)
-    }
 }

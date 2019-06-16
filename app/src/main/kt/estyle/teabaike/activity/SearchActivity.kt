@@ -5,22 +5,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
-import androidx.paging.PagedList
 import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
+import estyle.base.rxjava.observer.SnackbarObserver
+import estyle.base.widget.PagingRecyclerView
 import estyle.teabaike.R
-import estyle.teabaike.adapter.MainAdapter
+import estyle.teabaike.adapter.SearchAdapter
 import estyle.teabaike.entity.MainEntity
 import estyle.teabaike.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_search.*
 
-class SearchActivity : BaseActivity() {
+class SearchActivity : BaseActivity(), PagingRecyclerView.OnLoadListener {
+
 
     private val viewModel by lazy { ViewModelProviders.of(this)[SearchViewModel::class.java] }
 
-    private val adapter by lazy { MainAdapter() }
+    private val adapter by lazy { SearchAdapter() }
 
     private val keyword by lazy { intent.getStringExtra("keyword") }
 
@@ -33,9 +35,10 @@ class SearchActivity : BaseActivity() {
         supportActionBar?.title = keyword
 
         adapter.emptyView = empty_view
-        adapter.itemClickCallback = { ContentActivity.startActivity(this, it) }
+        adapter.onItemClickListener = { position, id -> ContentActivity.startActivity(this, id) }
         recycler_view.adapter = adapter
 
+        recycler_view.setOnLoadListener(this)
         swipe_refresh_layout.setOnRefreshListener { refresh() }
     }
 
@@ -48,16 +51,40 @@ class SearchActivity : BaseActivity() {
         }
     }
 
+    // PagingRecyclerView
+    override fun onLoad() {
+        viewModel.load(keyword)
+            .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
+                DisposableConverter.dispose(
+                    this
+                )
+            )
+            .subscribe(object : SnackbarObserver<List<MainEntity.DataEntity>>(recycler_view) {
+
+                override fun onNext(it: List<MainEntity.DataEntity>) {
+                    super.onNext(it)
+                    adapter.load(it)
+                    recycler_view.isLoading = false
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    recycler_view.isLoading = false
+                }
+            })
+    }
+
+    // SwipeRefreshLayout
     private fun refresh() {
         viewModel.refresh(keyword)
-            .`as`<ObservableSubscribeProxy<PagedList<MainEntity.DataEntity>>>(
+            .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
                 DisposableConverter.dispose(this)
             )
             .subscribe(object :
-                RefreshObserver<PagedList<MainEntity.DataEntity>>(swipe_refresh_layout) {
-                override fun onNext(it: PagedList<MainEntity.DataEntity>) {
+                RefreshObserver<List<MainEntity.DataEntity>>(swipe_refresh_layout) {
+                override fun onNext(it: List<MainEntity.DataEntity>) {
                     super.onNext(it)
-                    adapter.submitList(it)
+                    adapter.refresh(it)
                 }
 
                 override fun onError(e: Throwable) {
@@ -72,6 +99,12 @@ class SearchActivity : BaseActivity() {
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        swipe_refresh_layout.setOnRefreshListener(null)
+        recycler_view.setOnLoadListener(null)
     }
 
     companion object {

@@ -9,14 +9,13 @@ import javax.inject.Singleton
 @Component(modules = [DataSourceModule::class])
 interface DataSourceComponent {
 
-//    fun inject(dataSource: MainListDataSource)
-//    fun inject(dataSource: SearchListDataSource)
-
     fun inject(viewModel: MainViewModel)
 
     fun inject(viewModel: MainListViewModel)
 
     fun inject(viewModel: ContentViewModel)
+
+    fun inject(viewModel: SearchViewModel)
 
     fun inject(viewModel: CollectionViewModel)
 

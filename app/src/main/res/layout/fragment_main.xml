@@ -15,7 +15,7 @@
             android:layout_gravity="center"
             android:text="@string/loading_data" />
 
-        <estyle.base.widget.RecyclerView
+        <estyle.base.widget.PagingRecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

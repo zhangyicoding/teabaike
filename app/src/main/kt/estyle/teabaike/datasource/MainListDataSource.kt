@@ -10,25 +10,7 @@ import estyle.teabaike.config.Url
 import estyle.teabaike.entity.MainEntity
 import io.reactivex.Observable
 
-class MainListDataSource(private val type: String) :
-    BasePageKeyedDataSource<MainEntity.DataEntity>() {
-
-    override fun getObservable(page: Int): Observable<List<MainEntity.DataEntity>> {
-        val service = NetApi.mainService()
-        val observable = if (TextUtils.equals(type, Url.TITLES[0])) {
-            service.getMainHeadline(page)
-        } else {
-            service.getMain(type, page)
-        }
-        return observable.doOnNext(ErrorMessageConsumer())
-            .map { it.data }
-            .compose(SchedulersTransformer())
-    }
-
-    class Factory(val type: String) : BasePageKeyedDataSource.Factory<MainEntity.DataEntity>() {
-        override fun create(): DataSource<Int, MainEntity.DataEntity> =
-            MainListDataSource(type)
-    }
+class MainListDataSource {
 
     fun loadHeadline() =
         NetApi.mainService()
@@ -36,4 +18,16 @@ class MainListDataSource(private val type: String) :
             .doOnNext(ErrorMessageConsumer())
             .map { it.data }
             .compose(SchedulersTransformer())
+
+    fun loadList(type: String, page: Int): Observable<List<MainEntity.DataEntity>> {
+        val service = NetApi.mainService()
+        val observable = if (TextUtils.equals(type, Url.TITLES[0])) {
+            service.getHeadlineList(page)
+        } else {
+            service.getList(type, page)
+        }
+        return observable.doOnNext(ErrorMessageConsumer())
+            .map { it.data }
+            .compose(SchedulersTransformer())
+    }
 }

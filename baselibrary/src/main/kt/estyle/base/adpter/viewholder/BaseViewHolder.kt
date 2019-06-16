@@ -1,10 +1,11 @@
-package estyle.base
+package estyle.base.adpter.viewholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import estyle.base.adpter.BaseAdapter
 
 abstract class BaseViewHolder<T, VDB : ViewDataBinding>(parent: ViewGroup, layoutId: Int) :
     RecyclerView.ViewHolder(
