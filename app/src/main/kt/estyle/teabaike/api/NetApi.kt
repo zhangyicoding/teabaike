@@ -25,7 +25,7 @@ object NetApi {
         val client = OkHttpClient.Builder()
             .cache(Cache(File(context.externalCacheDir, "http_cache"), 10 * 1024 * 1024))
             .addInterceptor(ChuckInterceptor(context))
-            .addHttpMockInterceptor(context, true, 0L, HttpMockGenerator::class.java)
+            .addHttpMockInterceptor(context, true, HttpMockGenerator::class.java)
             .build()
 
         retrofit = Retrofit.Builder()
