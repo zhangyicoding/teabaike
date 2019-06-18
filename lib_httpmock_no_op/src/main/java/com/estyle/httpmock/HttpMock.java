@@ -10,7 +10,6 @@ public class HttpMock {
             OkHttpClient.Builder builder,
             Context context,
             boolean enable,
-            long delayMillis,
             Class<HttpMockGenerator> generatorClass
     ) {
         return builder;

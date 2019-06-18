@@ -2,9 +2,18 @@ package com.estyle.httpmock.common;
 
 public class MockEntity {
 
+    private long delayMillis;
     private boolean enable;
     private String fileName;
     private String url;
+
+    public long getDelayMillis() {
+        return delayMillis;
+    }
+
+    public void setDelayMillis(long delayMillis) {
+        this.delayMillis = delayMillis;
+    }
 
     public boolean isEnable() {
         return enable;
@@ -33,7 +42,8 @@ public class MockEntity {
     @Override
     public String toString() {
         return "MockEntity{" +
-                "enable=" + enable +
+                "delayMillis=" + delayMillis +
+                ", enable=" + enable +
                 ", fileName='" + fileName + '\'' +
                 ", url='" + url + '\'' +
                 '}';

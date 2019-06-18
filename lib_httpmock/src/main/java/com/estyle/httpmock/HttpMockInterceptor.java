@@ -20,18 +20,15 @@ public class HttpMockInterceptor implements Interceptor {
     private Context mContext;
     private List<MockEntity> mMockList;
     private boolean mEnable;// 全局启用假数据
-    private long mDelayMillis;// 网络延迟，单位ms
 
     public HttpMockInterceptor(
             Context context,
             List<MockEntity> mockList,
-            boolean enable,
-            long delayMillis
+            boolean enable
     ) {
         mContext = context;
         mMockList = mockList;
         mEnable = enable;
-        mDelayMillis = delayMillis < 0 ? 0 : delayMillis;
     }
 
     @Override
@@ -42,18 +39,18 @@ public class HttpMockInterceptor implements Interceptor {
         String url = oldRequest.url().toString();
 
         // 根据url获取对应mock
-        MockEntity mock = null;
+        MockEntity mockEntity = null;
         for (MockEntity entity : mMockList) {
             if (url.contains(entity.getUrl())) {
-                mock = entity;
+                mockEntity = entity;
                 break;
             }
         }
-        if (!mock.isEnable()) return chain.proceed(oldRequest);
+        if (!mockEntity.isEnable()) return chain.proceed(oldRequest);
 
         // 启用mock，则读取assets中的json文件
         InputStream open = mContext.getAssets()
-                .open("httpmock_debug/" + mock.getFileName());
+                .open("httpmock_debug/" + mockEntity.getFileName());
         byte[] buff = new byte[1024];
         int len;
         StringBuilder sb = new StringBuilder();
@@ -64,7 +61,8 @@ public class HttpMockInterceptor implements Interceptor {
 
         // 模拟网络延迟，单位ms
         try {
-            Thread.sleep(mDelayMillis);
+            long delayMillis = mockEntity.getDelayMillis() < 0 ? 0 : mockEntity.getDelayMillis();
+            Thread.sleep(delayMillis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

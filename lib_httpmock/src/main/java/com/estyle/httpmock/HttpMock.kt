@@ -16,7 +16,6 @@ object HttpMock {
         builder: OkHttpClient.Builder,
         context: Context,
         enable: Boolean,
-        delayMillis: Long,
         generatorClass: Class<out AbstractHttpMockGenerator>
     ): OkHttpClient.Builder {
         var generator: AbstractHttpMockGenerator? = null
@@ -29,7 +28,7 @@ object HttpMock {
         val json = generator!!.jsonString
         val type = object : TypeToken<List<MockEntity>>(){}.type
         val mockList = Gson().fromJson<List<MockEntity>>(json, type)
-        return builder.addInterceptor(HttpMockInterceptor(context, mockList, enable, delayMillis))
+        return builder.addInterceptor(HttpMockInterceptor(context, mockList, enable))
     }
 }
 
@@ -37,7 +36,6 @@ object HttpMock {
 fun OkHttpClient.Builder.addHttpMockInterceptor(
     context: Context,
     enable: Boolean,
-    delayMillis: Long,
     generatorClass: Class<out AbstractHttpMockGenerator>
 ): OkHttpClient.Builder {
     var generator: AbstractHttpMockGenerator? = null
@@ -50,5 +48,5 @@ fun OkHttpClient.Builder.addHttpMockInterceptor(
     val json = generator!!.jsonString
     val type = object : TypeToken<List<MockEntity>>(){}.type
     val mockList = Gson().fromJson<List<MockEntity>>(json, type)
-    return this.addInterceptor(HttpMockInterceptor(context, mockList, enable, delayMillis))
+    return this.addInterceptor(HttpMockInterceptor(context, mockList, enable))
 }

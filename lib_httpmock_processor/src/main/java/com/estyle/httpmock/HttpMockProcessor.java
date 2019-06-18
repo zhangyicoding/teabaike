@@ -27,8 +27,14 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.HTTP;
+import retrofit2.http.OPTIONS;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 @AutoService(Processor.class)
 public class HttpMockProcessor extends AbstractProcessor {
@@ -80,9 +86,35 @@ public class HttpMockProcessor extends AbstractProcessor {
             if (post != null) {
                 url = post.value();
             }
+            HEAD head = element.getAnnotation(HEAD.class);
+            if (head != null) {
+                url = head.value();
+            }
+            PUT put = element.getAnnotation(PUT.class);
+            if (put != null) {
+                url = put.value();
+            }
+            DELETE delete = element.getAnnotation(DELETE.class);
+            if (delete != null) {
+                url = delete.value();
+            }
+            PATCH patch = element.getAnnotation(PATCH.class);
+            if (patch != null) {
+                url = patch.value();
+            }
+            OPTIONS options = element.getAnnotation(OPTIONS.class);
+            if (options != null) {
+                url = options.value();
+            }
+            HTTP http = element.getAnnotation(HTTP.class);
+            if (http != null) {
+                url = http.path();
+            }
+
 
             HttpMock mock = element.getAnnotation(HttpMock.class);
             MockEntity mockEntity = new MockEntity();
+            mockEntity.setDelayMillis(mock.delayMillis());
             mockEntity.setEnable(mock.enable());
             mockEntity.setFileName(mock.fileName());
             mockEntity.setUrl(url);
