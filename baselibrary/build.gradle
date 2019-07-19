@@ -41,6 +41,13 @@ android {
     }
 }
 
+// ARouter
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -89,6 +96,10 @@ dependencies {
 
     // AutoDispose
     api "com.uber.autodispose:autodispose-android-archcomponents-ktx:${rootProject.ext.autodispose_version}"
+
+    // ARouter
+    api "com.alibaba:arouter-api:${rootProject.ext.arouter_api_version}"
+    kapt "com.alibaba:arouter-compiler:${rootProject.ext.arouter_compiler_version}"
 
     // LeakCanary
     debugApi "com.squareup.leakcanary:leakcanary-android:${rootProject.ext.leak_canary_version}"

@@ -22,6 +22,8 @@ ext {
     permissions_dispatcher_version = '4.3.1'
     rxandroid_version = '2.1.1'
     autodispose_version = '1.2.0'
+    arouter_api_version = '1.5.0'
+    arouter_compiler_version = '1.2.2'
     leak_canary_version = '1.6.3'
     chuck_version = '1.1.0'
 }

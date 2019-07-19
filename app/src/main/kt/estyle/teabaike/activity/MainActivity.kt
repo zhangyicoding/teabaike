@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
@@ -13,12 +14,14 @@ import estyle.base.rxjava.observer.SnackbarObserver
 import estyle.base.util.VersionUtil
 import estyle.teabaike.R
 import estyle.teabaike.adapter.MainPagerAdapter
+import estyle.teabaike.config.RoutePath
 import estyle.teabaike.entity.VersionEntity
 import estyle.teabaike.fragment.dialog.UpdateDialogFragment
 import estyle.teabaike.viewmodel.MainListViewModel
 import estyle.teabaike.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
+@Route(path = RoutePath.LAUNCHER_MAIN)
 class MainActivity : BaseActivity() {
 
     private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }

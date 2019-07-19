@@ -5,12 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.viewpager.widget.ViewPager
+import com.alibaba.android.arouter.facade.annotation.Route
 import estyle.base.BaseActivity
 import estyle.teabaike.R
 import estyle.teabaike.adapter.WelcomePagerAdapter
+import estyle.teabaike.config.RoutePath
 import estyle.teabaike.viewmodel.SplashViewModel
 import kotlinx.android.synthetic.main.activity_welcome.*
 
+@Route(path = RoutePath.LAUNCHER_WELCOME)
 class WelcomeActivity : BaseActivity(),
     WelcomePagerAdapter.OnButtonClickListener, ViewPager.OnPageChangeListener {
 

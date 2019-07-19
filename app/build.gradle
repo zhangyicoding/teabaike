@@ -57,6 +57,13 @@ android {
     }
 }
 
+// ARouter
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':baselibrary')
@@ -68,6 +75,8 @@ dependencies {
     // Dagger
     kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger_version}"
     kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.dagger_version}"
+    // ARouter
+    kapt "com.alibaba:arouter-compiler:${rootProject.ext.arouter_compiler_version}"
     // HttpMock
     kaptDebug project(path: ':lib_httpmock_processor')
 }
