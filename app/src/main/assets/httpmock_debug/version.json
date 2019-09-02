@@ -2,7 +2,7 @@
   "errorMessage": "success",
   "data": {
     "version_code": 2,
-    "version_name": "2.0.0",
+    "version_name": "2.0",
     "info": "新版本修复了若干bug",
     "force_update": true,
     "apk_link": "https://imtt.dd.qq.com/16891/8AECC6C637E09B0BEE611388DE5AE35A.apk?fsname=com.tencent.mobileqqi_6.0.1_6600.apk&csr=1bbd"
