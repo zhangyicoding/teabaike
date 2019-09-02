@@ -70,6 +70,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':baselibrary')
 
+    // Test
+    testImplementation "junit:junit:${rootProject.ext.junit_version}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runner_version}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.ext.espresso_core_version}"
+    androidTestImplementation "androidx.test:rules:${rootProject.ext.rules_version}"
+
     // Room
     kapt "androidx.room:room-compiler:${rootProject.ext.room_version}"
     // PermissionsDispatcher

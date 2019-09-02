@@ -5,9 +5,12 @@ ext {
     min_sdk_version = 17
     target_sdk_version = 28
 
+    // Test
     junit_version = '4.12'
     runner_version = '1.2.0'
-    espresso_core_version = '3.2.0'
+    rules_version = '1.2.0'
+    espresso_core_version = '3.1.1'
+
     core_version = '1.0.2'
     appcompat_version = '1.0.2'
     multidex_version = '2.0.1'
