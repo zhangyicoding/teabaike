@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Module
 class DataSourceModule {
-
+/*
     @Singleton
     @Provides
     fun provideMainDataSource(): MainDataSource {
@@ -43,4 +43,5 @@ class DataSourceModule {
     fun provideFeedbackDataSource(): FeedbackDataSource {
         return FeedbackDataSource()
     }
+ */
 }

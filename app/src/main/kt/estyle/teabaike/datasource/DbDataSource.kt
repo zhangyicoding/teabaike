@@ -1,11 +1,11 @@
-package estyle.teabaike.api
+package estyle.teabaike.datasource
 
 import android.content.Context
 import androidx.room.Room
 import estyle.teabaike.TeaBaikeDatabase
 import estyle.teabaike.config.Db
 
-object DatabaseApi {
+object DbDataSource {
 
     private lateinit var database: TeaBaikeDatabase
 

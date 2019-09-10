@@ -1,14 +1,13 @@
-package estyle.teabaike.api
+package estyle.teabaike.datasource
 
 import android.content.Context
-import com.estyle.httpmock.HttpMock
 import com.estyle.httpmock.HttpMockGenerator
 import com.estyle.httpmock.addHttpMockInterceptor
 import com.readystatesoftware.chuck.ChuckInterceptor
-import estyle.teabaike.api.net.ContentService
-import estyle.teabaike.api.net.FeedbackService
-import estyle.teabaike.api.net.MainService
-import estyle.teabaike.api.net.SearchService
+import estyle.teabaike.datasource.net.ContentService
+import estyle.teabaike.datasource.net.FeedbackService
+import estyle.teabaike.datasource.net.MainService
+import estyle.teabaike.datasource.net.SearchService
 import estyle.teabaike.config.Url
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -17,7 +16,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
-object NetApi {
+object NetDataSource {
 
     private lateinit var retrofit: Retrofit
 

@@ -83,7 +83,7 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
 
     // PagingRecyclerView
     override fun onLoad() {
-        viewModel.load(type)
+        viewModel.loadMore(type)
             .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
                 DisposableConverter.dispose(
                     this

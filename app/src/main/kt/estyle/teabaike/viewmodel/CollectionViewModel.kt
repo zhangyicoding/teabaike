@@ -4,28 +4,28 @@ import android.app.Application
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import estyle.base.BaseViewModel
-import estyle.teabaike.datasource.CollectionDataSource
+import estyle.base.rxjava.SchedulersTransformer
+import estyle.teabaike.datasource.DbDataSource
 import estyle.teabaike.entity.ContentEntity
-import estyle.teabaike.util.InjectUtil
 import io.reactivex.Observable
-import javax.inject.Inject
 
 class CollectionViewModel(application: Application) : BaseViewModel(application) {
 
-    @Inject
-    lateinit var dataSource: CollectionDataSource
+//    @Inject
+//    lateinit var dataSource: CollectionDataSource
 
-    init {
-        InjectUtil.dataSourceComponent()
-            .inject(this)
-    }
+//    init {
+//        InjectUtil.dataSourceComponent()
+//            .inject(this)
+//    }
 
     private var collectionListBuilder: RxPagedListBuilder<Int, ContentEntity.DataEntity>? = null
 
     fun refresh(): Observable<PagedList<ContentEntity.DataEntity>> {
         if (collectionListBuilder == null) {
             collectionListBuilder = RxPagedListBuilder(
-                dataSource.queryAll(),
+                DbDataSource.collectionDao()
+                    .queryAll(),
                 PagedList.Config.Builder()
                     .setInitialLoadSizeHint(10)
                     .setPageSize(10)
@@ -35,5 +35,8 @@ class CollectionViewModel(application: Application) : BaseViewModel(application)
         return collectionListBuilder!!.buildObservable()
     }
 
-    fun deleteItems(items: List<ContentEntity.DataEntity>) = dataSource.delete(items)
+    fun deleteItems(items: List<ContentEntity.DataEntity>) = DbDataSource.collectionDao()
+        .delete(items)
+        .toObservable()
+        .compose(SchedulersTransformer())
 }

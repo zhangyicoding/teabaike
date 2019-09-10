@@ -1,4 +1,4 @@
-package estyle.teabaike.api.net
+package estyle.teabaike.datasource.net
 
 import com.estyle.httpmock.annotation.HttpMock
 import estyle.teabaike.config.Url

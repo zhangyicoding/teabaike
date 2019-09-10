@@ -2,19 +2,22 @@ package estyle.teabaike.viewmodel
 
 import android.app.Application
 import estyle.base.BaseViewModel
-import estyle.teabaike.datasource.FeedbackDataSource
-import estyle.teabaike.util.InjectUtil
-import javax.inject.Inject
+import estyle.base.rxjava.ErrorMessageConsumer
+import estyle.base.rxjava.SchedulersTransformer
+import estyle.teabaike.datasource.NetDataSource
 
 class FeedbackViewModel(application: Application) : BaseViewModel(application) {
 
-    @Inject
-    lateinit var dataSource: FeedbackDataSource
+//    @Inject
+//    lateinit var dataSource: FeedbackDataSource
 
-    init {
-        InjectUtil.dataSourceComponent()
-            .inject(this)
-    }
+//    init {
+//        InjectUtil.dataSourceComponent()
+//            .inject(this)
+//    }
 
-    fun feedback(title: String, content: String) = dataSource.feedback(title, content)
+    fun feedback(title: String, content: String) = NetDataSource.feedbackService()
+        .postFeedback(title, content)
+        .doOnNext(ErrorMessageConsumer())
+        .compose(SchedulersTransformer())
 }

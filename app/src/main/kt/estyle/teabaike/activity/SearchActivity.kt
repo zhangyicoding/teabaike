@@ -53,7 +53,7 @@ class SearchActivity : BaseActivity(), PagingRecyclerView.OnLoadListener {
 
     // PagingRecyclerView
     override fun onLoad() {
-        viewModel.load(keyword)
+        viewModel.loadMore(keyword)
             .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
                 DisposableConverter.dispose(
                     this

@@ -2,19 +2,23 @@ package estyle.teabaike.viewmodel
 
 import android.app.Application
 import estyle.base.BaseViewModel
-import estyle.teabaike.datasource.MainDataSource
-import estyle.teabaike.util.InjectUtil
-import javax.inject.Inject
+import estyle.base.rxjava.ErrorMessageConsumer
+import estyle.base.rxjava.SchedulersTransformer
+import estyle.teabaike.datasource.NetDataSource
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
-    @Inject
-    lateinit var dataSource: MainDataSource
+//    @Inject
+//    lateinit var dataSource: MainDataSource
 
-    init {
-        InjectUtil.dataSourceComponent()
-            .inject(this)
-    }
+//    init {
+//        InjectUtil.dataSourceComponent()
+//            .inject(this)
+//    }
 
-    fun checkVersion() = dataSource.checkVersion()
+    fun checkVersion() = NetDataSource.mainService()
+        .getLatestVersion()
+        .doOnNext(ErrorMessageConsumer())
+        .map { it.data }
+        .compose(SchedulersTransformer())
 }
