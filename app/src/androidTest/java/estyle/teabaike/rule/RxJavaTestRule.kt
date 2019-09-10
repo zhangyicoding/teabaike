@@ -1,4 +1,4 @@
-package estyle.teabaike
+package estyle.teabaike.rule
 
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -8,7 +8,7 @@ import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 
-class RxJavaRule : TestRule {
+class RxJavaTestRule : TestRule {
 
     override fun apply(base: Statement, description: Description): Statement {
         return object : Statement() {
