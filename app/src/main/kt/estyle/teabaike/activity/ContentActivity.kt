@@ -23,6 +23,8 @@ import java.lang.reflect.Method
 
 class ContentActivity : BaseActivity() {
 
+    private lateinit var menu: Menu
+
     private val id by lazy { intent.getLongExtra("id", 0) }
     private var shareContent: String? = null
 
@@ -65,11 +67,15 @@ class ContentActivity : BaseActivity() {
                     super.onNext(it)
                     binding.content = it
                     shareContent = it.weiboUrl
+
+                    // 启用菜单
+                    menu.setGroupEnabled(R.id.content_group, true)
                 }
             })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        this.menu = menu
         menuInflater.inflate(R.menu.menu_content, menu)
         val setOptionalIconsVisibleMethod: Method = menu.javaClass.getDeclaredMethod(
             "setOptionalIconsVisible",

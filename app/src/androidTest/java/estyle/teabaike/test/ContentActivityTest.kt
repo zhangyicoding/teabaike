@@ -43,8 +43,6 @@ class ContentActivityTest : BaseTest() {
                 println("111" + it)
             }, {
                 println("222error: " + it)
-            }, {
-                println(333)
             })
     }
 }

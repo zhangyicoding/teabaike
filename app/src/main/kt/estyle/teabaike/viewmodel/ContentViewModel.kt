@@ -26,6 +26,6 @@ class ContentViewModel(application: Application) : BaseViewModel(application) {
 
     fun collect(content: ContentEntity.DataEntity) = DbDataSource.collectionDao()
         .insert(content)
-        .toObservable<Long>()
+        .toObservable()
         .compose(SchedulersTransformer())
 }

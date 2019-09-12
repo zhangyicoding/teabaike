@@ -14,7 +14,7 @@ import io.reactivex.Single
 interface CollectionDao {
 
     @Insert
-    fun insert(content: ContentEntity.DataEntity): Completable
+    fun insert(content: ContentEntity.DataEntity): Single<Long>
 
     @Delete
     fun delete(contents: List<ContentEntity.DataEntity>): Single<Int>
