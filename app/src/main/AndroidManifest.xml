@@ -39,7 +39,5 @@
         <activity android:name=".activity.CopyrightActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.SearchActivity" />
-
     </application>
-
 </manifest>

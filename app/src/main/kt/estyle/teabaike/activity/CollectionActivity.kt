@@ -121,6 +121,7 @@ class CollectionActivity : BaseActivity() {
                     super.onNext(deleteCount)
                     val text = String.format(getString(R.string.delete_successful, deleteCount))
                     Snackbar.make(swipe_refresh_layout, text, Snackbar.LENGTH_SHORT).show()
+                    setDeleteEnabled(false)
                 }
             })
     }
