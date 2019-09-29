@@ -27,7 +27,7 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_toRightOf="@id/delete_box"
             android:text="@{collection.title}"
-            android:textColor="@android:color/black" />
+            android:textColor="?android:attr/textColorPrimary" />
 
         <TextView
             android:id="@+id/source_tv"

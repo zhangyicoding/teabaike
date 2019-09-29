@@ -13,8 +13,8 @@ class UpdateDialogFragment : BaseDialogFragment() {
         val version = arguments!!.getParcelable<VersionEntity.DataEntity>("version")
         return AlertDialog.Builder(context)
             .setTitle("发现新版本")
-            .setMessage(version.info)
-            .setCancelable(!version.force_update)
+            .setMessage(version?.info)
+            .setCancelable(!version!!.force_update)
             .setPositiveButton("更新") { dialog, which -> }
             .setNegativeButton("取消", if (version.force_update)
                 DialogInterface.OnClickListener { dialog, which -> activity?.finish() }

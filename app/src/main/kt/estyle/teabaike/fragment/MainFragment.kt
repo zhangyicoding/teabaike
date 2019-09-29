@@ -31,8 +31,8 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
     private val viewModel by lazy { ViewModelProviders.of(this)[MainListViewModel::class.java] }
     private lateinit var adapter: MainListAdapter
 
-    val title: String by lazy { arguments!!.getString(TITLE) }
-    private val type by lazy { arguments!!.getString(TYPE) }
+    val title: String by lazy { arguments!!.getString(TITLE)!! }
+    private val type by lazy { arguments!!.getString(TYPE)!! }
 
     override fun onCreateView(
         inflater: LayoutInflater,

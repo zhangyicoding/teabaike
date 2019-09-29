@@ -9,18 +9,17 @@ data class VersionEntity(val data: DataEntity) : NetEntity() {
     data class DataEntity(
         val apk_link: String,
         val force_update: Boolean,
-        val info: String,
+        val info: String?,
         val version_code: Long,
         val version_name: String
     ) : Parcelable {
         constructor(parcel: Parcel) : this(
-            parcel.readString(),
+            parcel.readString()!!,
             parcel.readByte() != 0.toByte(),
             parcel.readString(),
             parcel.readLong(),
-            parcel.readString()
-        ) {
-        }
+            parcel.readString()!!
+        )
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             parcel.writeString(apk_link)

@@ -1,9 +1,9 @@
 ext {
     java_version = JavaVersion.VERSION_1_8
-    compile_sdk_version = 28
-    build_tools_version = '28.0.3'
+    compile_sdk_version = 29
+    build_tools_version = '29.0.2'
     min_sdk_version = 17
-    target_sdk_version = 28
+    target_sdk_version = 29
 
     // Test
     junit_version = '4.12'
@@ -20,8 +20,8 @@ ext {
     room_version = '2.1.0'
     material_version = '1.0.0'
     dagger_version = '2.24'
-    glide_version = '4.9.0'
-    retrofit_version = '2.6.1'
+    glide_version = '4.10.0'
+    retrofit_version = '2.6.2'
     permissions_dispatcher_version = '4.3.1'
     rxandroid_version = '2.1.1'
     autodispose_version = '1.2.0'

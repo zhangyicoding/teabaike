@@ -14,24 +14,23 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:theme="@style/AppBarOverlay">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/titlebar_height"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:title="@string/app_name"
-                app:titleTextColor="@android:color/white" />
+                app:theme="@style/AppBarOverlay"
+                app:title="@string/app_name" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/titlebar_height"
-                app:tabBackground="@android:color/white"
+                app:tabBackground="?android:attr/colorBackground"
                 app:tabSelectedTextColor="@color/tea_theme"
-                app:tabTextColor="@android:color/black" />
+                app:tabTextColor="?android:attr/textColorPrimary" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
