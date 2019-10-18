@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.fragment.dialog.ProgressDialogFragment
 import estyle.base.rxjava.observer.DialogObserver
@@ -48,7 +47,7 @@ class FeedbackActivity : BaseActivity(), View.OnFocusChangeListener {
     private fun feedback(title: String, content: String) {
         progressDialog.show(supportFragmentManager, null)
         viewModel.feedback(title, content)
-            .`as`<ObservableSubscribeProxy<FeedbackEntity>>(DisposableConverter.dispose(this))
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object : DialogObserver<FeedbackEntity>(progressDialog) {
                 override fun onNext(it: FeedbackEntity) {
                     super.onNext(it)

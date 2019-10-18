@@ -7,9 +7,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.fragment.BaseFragment
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
@@ -21,6 +19,7 @@ import estyle.teabaike.adapter.MainListAdapter
 import estyle.teabaike.config.Url
 import estyle.teabaike.entity.MainEntity
 import estyle.teabaike.viewmodel.MainListViewModel
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_main.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
@@ -47,21 +46,18 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
 
         adapter = MainListAdapter()
         adapter.emptyView = empty_view
-        // todo context全部改为nonnull
+        // TODO context全部改为nonnull
         adapter.onItemClickListener =
             { position, id -> ContentActivity.startActivity(context!!, id) }
         recycler_view.adapter = adapter
         recycler_view.setOnLoadListener(this)
         swipe_refresh_layout.setOnRefreshListener { refresh() }
 
-        viewModel.refreshMainList.observe(this, Observer { adapter.refresh(it) })
+        // 头条Banner
         if (TextUtils.equals(type, Url.TYPES[0])) {
-            viewModel.refreshHeadlineList.observe(this, Observer {
-                adapter.headlineList = it
-                adapter.onHeadlineViewHolderCreatedCallback = { holder ->
-                    lifecycle.addObserver(holder)
-                }
-            })
+            adapter.onHeadlineViewHolderCreatedCallback = { holder ->
+                lifecycle.addObserver(holder)
+            }
         }
     }
 
@@ -81,14 +77,36 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
         }
     }
 
+    // SwipeRefreshLayout
+    private fun refresh() {
+        val refreshListObservable = viewModel.refreshList(type)
+            .doOnNext { adapter.refresh(it) }
+
+        var observable: Observable<out List<Any>> = refreshListObservable
+
+        // 头条
+        if (TextUtils.equals(type, Url.TYPES[0])) {
+            val loadHeadlineObservable = viewModel.loadHeadline()
+                .doOnNext { adapter.headlineList = it }
+            observable = Observable.mergeDelayError(refreshListObservable, loadHeadlineObservable)
+        }
+
+        // 当所有网络请求全部结束后，更新刷新状态
+        observable
+            .map {}// TODO 原始数据类型会报错，必须转成其它类型？空的也可以？？？醉了
+            .`as`(DisposableConverter.dispose(this))
+            .subscribe(object : RefreshObserver<Any>(swipe_refresh_layout) {
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    empty_view.setText(R.string.request_fail)
+                }
+            })
+    }
+
     // PagingRecyclerView
     override fun onLoad() {
-        viewModel.loadMore(type)
-            .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
-                DisposableConverter.dispose(
-                    this
-                )
-            )
+        viewModel.moreList(type)
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object : SnackbarObserver<List<MainEntity.DataEntity>>(recycler_view) {
 
                 override fun onNext(it: List<MainEntity.DataEntity>) {
@@ -100,18 +118,6 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
                 override fun onError(e: Throwable) {
                     super.onError(e)
                     recycler_view.isLoading = false
-                }
-            })
-    }
-
-    // SwipeRefreshLayout
-    private fun refresh() {
-        viewModel.refresh(type)
-            .`as`<ObservableSubscribeProxy<MainListViewModel>>(DisposableConverter.dispose(this))
-            .subscribe(object : RefreshObserver<MainListViewModel>(swipe_refresh_layout) {
-                override fun onError(e: Throwable) {
-                    super.onError(e)
-                    empty_view.setText(R.string.request_fail)
                 }
             })
     }

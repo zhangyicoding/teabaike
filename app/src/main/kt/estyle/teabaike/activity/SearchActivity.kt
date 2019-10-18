@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
-import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
@@ -54,11 +53,7 @@ class SearchActivity : BaseActivity(), PagingRecyclerView.OnLoadListener {
     // PagingRecyclerView
     override fun onLoad() {
         viewModel.loadMore(keyword)
-            .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
-                DisposableConverter.dispose(
-                    this
-                )
-            )
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object : SnackbarObserver<List<MainEntity.DataEntity>>(recycler_view) {
 
                 override fun onNext(it: List<MainEntity.DataEntity>) {
@@ -77,9 +72,7 @@ class SearchActivity : BaseActivity(), PagingRecyclerView.OnLoadListener {
     // SwipeRefreshLayout
     private fun refresh() {
         viewModel.refresh(keyword)
-            .`as`<ObservableSubscribeProxy<List<MainEntity.DataEntity>>>(
-                DisposableConverter.dispose(this)
-            )
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object :
                 RefreshObserver<List<MainEntity.DataEntity>>(swipe_refresh_layout) {
                 override fun onNext(it: List<MainEntity.DataEntity>) {

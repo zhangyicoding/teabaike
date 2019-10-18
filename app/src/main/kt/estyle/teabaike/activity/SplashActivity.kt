@@ -2,7 +2,6 @@ package estyle.teabaike.activity
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
-import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.teabaike.config.RoutePath
@@ -16,7 +15,7 @@ class SplashActivity : BaseActivity() {
         super.onPostCreate(savedInstanceState)
 
         viewModel.delay(2)
-            .`as`<ObservableSubscribeProxy<Boolean>>(DisposableConverter.dispose(this))
+            .`as`(DisposableConverter.dispose(this))
             .subscribe { isFirstLogin ->
                 if (isFirstLogin) {
                     aRouter.build(RoutePath.LAUNCHER_WELCOME).navigation()

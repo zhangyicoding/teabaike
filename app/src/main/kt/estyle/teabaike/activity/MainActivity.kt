@@ -7,7 +7,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.SnackbarObserver
@@ -17,7 +16,6 @@ import estyle.teabaike.adapter.MainPagerAdapter
 import estyle.teabaike.config.RoutePath
 import estyle.teabaike.entity.VersionEntity
 import estyle.teabaike.fragment.dialog.UpdateDialogFragment
-import estyle.teabaike.viewmodel.MainListViewModel
 import estyle.teabaike.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,9 +40,7 @@ class MainActivity : BaseActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         viewModel.checkVersion()
-            .`as`<ObservableSubscribeProxy<VersionEntity.DataEntity>>(
-                DisposableConverter.dispose(this)
-            )
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object :
                 SnackbarObserver<VersionEntity.DataEntity>(main_drawer_layout) {
                 override fun onNext(it: VersionEntity.DataEntity) {

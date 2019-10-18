@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
-import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
@@ -83,9 +82,7 @@ class CollectionActivity : BaseActivity() {
 
     private fun refresh() {
         viewModel.refresh()
-            .`as`<ObservableSubscribeProxy<PagedList<ContentEntity.DataEntity>>>(
-                DisposableConverter.dispose(this)
-            )
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object :
                 RefreshObserver<PagedList<ContentEntity.DataEntity>>(swipe_refresh_layout) {
                 override fun onNext(it: PagedList<ContentEntity.DataEntity>) {
@@ -114,7 +111,7 @@ class CollectionActivity : BaseActivity() {
     // 删除选中数据
     private fun deleteItems() {
         viewModel.deleteItems(adapter.deleteData())
-            .`as`<ObservableSubscribeProxy<Int>>(DisposableConverter.dispose(this))
+            .`as`(DisposableConverter.dispose(this))
             // todo 写android.R.id.content行不行
             .subscribe(object : SnackbarObserver<Int>(swipe_refresh_layout) {
                 override fun onNext(deleteCount: Int) {

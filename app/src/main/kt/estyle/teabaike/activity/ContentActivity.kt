@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.uber.autodispose.ObservableSubscribeProxy
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
@@ -59,9 +58,7 @@ class ContentActivity : BaseActivity() {
 
     private fun refresh() {
         viewModel.refresh(id)
-            .`as`<ObservableSubscribeProxy<ContentEntity.DataEntity>>(
-                DisposableConverter.dispose(this)
-            )
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object : RefreshObserver<ContentEntity.DataEntity>(swipe_refresh_layout) {
                 override fun onNext(it: ContentEntity.DataEntity) {
                     super.onNext(it)
@@ -98,7 +95,7 @@ class ContentActivity : BaseActivity() {
     // 收藏文章
     private fun collect() {
         viewModel.collect(binding.content!!)
-            .`as`<ObservableSubscribeProxy<Long>>(DisposableConverter.dispose(this))
+            .`as`(DisposableConverter.dispose(this))
             .subscribe(object :
                 SnackbarObserver<Long>(binding.root, getString(R.string.collect_failure)) {
                 override fun onComplete() {
