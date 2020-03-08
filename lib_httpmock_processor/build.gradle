@@ -7,7 +7,7 @@ dependencies {
     implementation "com.squareup:javapoet:1.11.1"
     implementation project(path: ':lib_httpmock_annotation')
     implementation project(path: ':lib_httpmock_common')
-    api "com.google.code.gson:gson:2.8.5"
+    implementation "com.google.code.gson:gson:2.8.5"
 }
 
 sourceCompatibility = rootProject.ext.java_version

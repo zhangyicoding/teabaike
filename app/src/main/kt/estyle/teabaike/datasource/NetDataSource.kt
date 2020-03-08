@@ -2,7 +2,7 @@ package estyle.teabaike.datasource
 
 import android.content.Context
 import com.estyle.httpmock.HttpMockGenerator
-import com.estyle.httpmock.addHttpMockInterceptor
+import com.estyle.httpmock.HttpMockInterceptor
 import com.readystatesoftware.chuck.ChuckInterceptor
 import estyle.teabaike.datasource.net.ContentService
 import estyle.teabaike.datasource.net.FeedbackService
@@ -23,8 +23,8 @@ object NetDataSource {
     fun init(context: Context) {
         val client = OkHttpClient.Builder()
             .cache(Cache(File(context.externalCacheDir, "http_cache"), 10 * 1024 * 1024))
+            .addInterceptor(HttpMockInterceptor(context, true, HttpMockGenerator::class.java))
             .addInterceptor(ChuckInterceptor(context))
-            .addHttpMockInterceptor(context, true, HttpMockGenerator::class.java)
             .build()
 
         retrofit = Retrofit.Builder()

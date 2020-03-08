@@ -2,7 +2,8 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':lib_httpmock_annotation')
 }
 
-sourceCompatibility = rootProject.ext.java_version
-targetCompatibility = rootProject.ext.java_version
+sourceCompatibility = "8"
+targetCompatibility = "8"
