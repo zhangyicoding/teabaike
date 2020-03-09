@@ -5,7 +5,7 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import estyle.base.BaseViewModel
 import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.DbDataSource
+import estyle.teabaike.TeaBaikeDatabase
 import estyle.teabaike.entity.ContentEntity
 import io.reactivex.Observable
 
@@ -24,7 +24,7 @@ class CollectionViewModel(application: Application) : BaseViewModel(application)
     fun refresh(): Observable<PagedList<ContentEntity.DataEntity>> {
         if (collectionListBuilder == null) {
             collectionListBuilder = RxPagedListBuilder(
-                DbDataSource.collectionDao()
+                TeaBaikeDatabase.INSTANCE.collectionDao()
                     .queryAll(),
                 PagedList.Config.Builder()
                     .setInitialLoadSizeHint(10)
@@ -35,7 +35,8 @@ class CollectionViewModel(application: Application) : BaseViewModel(application)
         return collectionListBuilder!!.buildObservable()
     }
 
-    fun deleteItems(items: List<ContentEntity.DataEntity>) = DbDataSource.collectionDao()
+    fun deleteItems(items: List<ContentEntity.DataEntity>) = TeaBaikeDatabase.INSTANCE
+        .collectionDao()
         .delete(items)
         .toObservable()
         .compose(SchedulersTransformer())

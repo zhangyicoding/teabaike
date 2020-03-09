@@ -4,8 +4,9 @@ import android.app.Application
 import estyle.base.BaseViewModel
 import estyle.base.rxjava.ErrorMessageConsumer
 import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.NetDataSource
+import estyle.teabaike.datasource.net.SearchService
 import estyle.teabaike.entity.MainEntity
+import estyle.teabaike.util.NetworkUtil
 import io.reactivex.Observable
 
 class SearchViewModel(application: Application) : BaseViewModel(application) {
@@ -27,7 +28,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
 
     fun loadMore(keyword: String) = loadList(keyword, page++)
 
-    private fun loadList(keyword: String, page: Int) = NetDataSource.searchService()
+    private fun loadList(keyword: String, page: Int) = NetworkUtil.service(SearchService::class.java)
         .getSearch(keyword, page)
         .doOnNext(ErrorMessageConsumer())
         .map { it.data }

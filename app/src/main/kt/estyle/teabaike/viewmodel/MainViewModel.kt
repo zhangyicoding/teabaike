@@ -4,7 +4,8 @@ import android.app.Application
 import estyle.base.BaseViewModel
 import estyle.base.rxjava.ErrorMessageConsumer
 import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.NetDataSource
+import estyle.teabaike.datasource.net.MainService
+import estyle.teabaike.util.NetworkUtil
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
@@ -16,7 +17,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
 //            .inject(this)
 //    }
 
-    fun checkVersion() = NetDataSource.mainService()
+    fun checkVersion() = NetworkUtil.service(MainService::class.java)
         .getLatestVersion()
         .doOnNext(ErrorMessageConsumer())
         .map { it.data }
