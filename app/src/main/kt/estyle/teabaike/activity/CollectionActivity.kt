@@ -1,11 +1,14 @@
 package estyle.teabaike.activity
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.paging.PagedList
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
@@ -24,6 +27,8 @@ class CollectionActivity : BaseActivity() {
     private val viewModel by lazy { ViewModelProviders.of(this)[CollectionViewModel::class.java] }
 
     private val adapter by lazy { CollectionAdapter() }
+
+    private val deleteReceiver by lazy { DeleteReceiver() }
 
     // 删除功能是否可用
     private var mIsDeleteEnabled: Boolean = false
@@ -54,11 +59,6 @@ class CollectionActivity : BaseActivity() {
                 setDeleteEnabled(true)
             }
         }
-        // 控制全选按钮文字
-        adapter.deleteAllCallback = { isDeleteAll ->
-            check_all_text_view.text =
-                getString(if (isDeleteAll) R.string.uncheck_all else R.string.check_all)
-        }
         recycler_view.adapter = adapter
 
         check_all_text_view.setOnClickListener {
@@ -69,6 +69,9 @@ class CollectionActivity : BaseActivity() {
         }
         delete_btn.setOnClickListener { deleteDialog.show(supportFragmentManager, null) }
         swipe_refresh_layout.setOnRefreshListener { refresh() }
+
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(deleteReceiver, IntentFilter(ACTION_DELETE_ITEM))
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -147,10 +150,22 @@ class CollectionActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        LocalBroadcastManager.getInstance(this)
+            .unregisterReceiver(deleteReceiver)
         swipe_refresh_layout.setOnRefreshListener(null)
     }
 
+    inner class DeleteReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val isDeleteAll = intent!!.getBooleanExtra(EXTRA_DELETE_ALL, false)
+            check_all_text_view.text =
+                getString(if (isDeleteAll) R.string.uncheck_all else R.string.check_all)
+        }
+    }
+
     companion object {
+        const val ACTION_DELETE_ITEM = "action.DELETE_ITEM"
+        const val EXTRA_DELETE_ALL = "EXTRA_DELETE_ALL"
 
         fun startActivity(context: Context) {
             val intent = Intent(context, CollectionActivity::class.java)

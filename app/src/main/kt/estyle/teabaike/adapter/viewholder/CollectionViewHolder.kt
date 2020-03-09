@@ -1,8 +1,12 @@
 package estyle.teabaike.adapter.viewholder
 
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import estyle.base.adpter.viewholder.BaseViewHolder
+import estyle.teabaike.activity.CollectionActivity.Companion.ACTION_DELETE_ITEM
+import estyle.teabaike.activity.CollectionActivity.Companion.EXTRA_DELETE_ALL
 import estyle.teabaike.adapter.CollectionAdapter
 import estyle.teabaike.databinding.ItemCollectionBinding
 import estyle.teabaike.entity.ContentEntity
@@ -35,12 +39,20 @@ class CollectionViewHolder(
             // 监听是否全选/取消全选，修改Activity中按钮状态
             var count = 0
             adapter.currentList!!.forEach { if (it.isChecked) count++ }
+
             if (count == 0) {
-                adapter.deleteAllCallback?.invoke(false)
+                notifyDeleteState(false)
             } else if (count == adapter.currentList!!.size) {
-                adapter.deleteAllCallback?.invoke(true)
+                notifyDeleteState(true)
             }
         }
+    }
+
+    private fun notifyDeleteState(isDeleteAll: Boolean) {
+        LocalBroadcastManager.getInstance(itemView.context)
+            .sendBroadcast(Intent(ACTION_DELETE_ITEM).apply {
+                putExtra(EXTRA_DELETE_ALL, isDeleteAll)
+            })
     }
 
     override fun bind(currentItem: ContentEntity.DataEntity) {

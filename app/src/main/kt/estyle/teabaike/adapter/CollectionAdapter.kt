@@ -14,8 +14,6 @@ class CollectionAdapter :
     var isDeleteBoxVisible: Boolean = false
     private val deleteList by lazy { arrayListOf<ContentEntity.DataEntity>() }
 
-    var deleteAllCallback: ((isDeleteAll: Boolean) -> Unit)? = null
-
     // CheckBox可见
     fun setDeleteBoxVisibility(isDeleteBoxVisible: Boolean) {
         currentList ?: return
