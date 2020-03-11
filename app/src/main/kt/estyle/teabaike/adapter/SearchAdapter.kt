@@ -6,7 +6,7 @@ import estyle.teabaike.R
 import estyle.teabaike.adapter.viewholder.MainViewHolder
 import estyle.teabaike.entity.MainEntity
 
-class SearchAdapter : BaseAdapter<MainEntity.DataEntity, MainViewHolder>() {
+class SearchAdapter : BaseAdapter<MainEntity, MainViewHolder>() {
 
     override fun getItemId(position: Int): Long = itemList[position].id?.toLong() ?: 0L
 

@@ -9,12 +9,12 @@ import estyle.teabaike.adapter.viewholder.MainViewHolder
 import estyle.teabaike.entity.HeadlineEntity
 import estyle.teabaike.entity.MainEntity
 
-class MainListAdapter : BaseAdapter<MainEntity.DataEntity, RecyclerView.ViewHolder>() {
+class MainListAdapter : BaseAdapter<MainEntity, RecyclerView.ViewHolder>() {
 
     var onHeadlineViewHolderCreatedCallback: ((holder: MainHeadlineViewHolder) -> Unit)? = null
 
     private var headerCount: Int = 0
-    var headlineList: List<HeadlineEntity.DataEntity>? = null
+    var headlineList: List<HeadlineEntity>? = null
         set(value) {
             value ?: return
             if (field != null) headerCount--

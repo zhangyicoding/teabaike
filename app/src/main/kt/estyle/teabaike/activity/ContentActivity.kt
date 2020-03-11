@@ -59,8 +59,8 @@ class ContentActivity : BaseActivity() {
     private fun refresh() {
         viewModel.refresh(id)
             .`as`(DisposableConverter.dispose(this))
-            .subscribe(object : RefreshObserver<ContentEntity.DataEntity>(swipe_refresh_layout) {
-                override fun onNext(it: ContentEntity.DataEntity) {
+            .subscribe(object : RefreshObserver<ContentEntity>(swipe_refresh_layout) {
+                override fun onNext(it: ContentEntity) {
                     super.onNext(it)
                     binding.content = it
                     shareContent = it.weiboUrl

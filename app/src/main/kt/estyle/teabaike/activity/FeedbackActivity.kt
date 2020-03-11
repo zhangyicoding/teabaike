@@ -16,7 +16,6 @@ import estyle.base.rxjava.observer.DialogObserver
 import estyle.base.rxjava.DisposableConverter
 import estyle.teabaike.R
 import estyle.teabaike.databinding.ActivityFeedbackBinding
-import estyle.teabaike.entity.FeedbackEntity
 import estyle.teabaike.viewmodel.FeedbackViewModel
 import kotlinx.android.synthetic.main.activity_feedback.*
 
@@ -48,8 +47,8 @@ class FeedbackActivity : BaseActivity(), View.OnFocusChangeListener {
         progressDialog.show(supportFragmentManager, null)
         viewModel.feedback(title, content)
             .`as`(DisposableConverter.dispose(this))
-            .subscribe(object : DialogObserver<FeedbackEntity>(progressDialog) {
-                override fun onNext(it: FeedbackEntity) {
+            .subscribe(object : DialogObserver<String>(progressDialog) {
+                override fun onNext(it: String) {
                     super.onNext(it)
                     showTip(getString(R.string.suggestion_successful), R.color.colorAccent)
                     binding.text = ""

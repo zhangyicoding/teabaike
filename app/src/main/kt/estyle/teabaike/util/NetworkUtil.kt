@@ -18,8 +18,8 @@ object NetworkUtil {
     fun init(context: Context, baseUrl: String) {
         val client = OkHttpClient.Builder()
             .cache(Cache(File(context.externalCacheDir, "http_cache"), 10 * 1024 * 1024))
-            .addInterceptor(HttpMockInterceptor(context, true, HttpMockGenerator::class.java))
             .addInterceptor(ChuckInterceptor(context))
+            .addInterceptor(HttpMockInterceptor(context, true, HttpMockGenerator::class.java))
             .build()
 
         retrofit = Retrofit.Builder()

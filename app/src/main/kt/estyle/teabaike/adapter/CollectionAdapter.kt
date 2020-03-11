@@ -8,11 +8,11 @@ import estyle.teabaike.adapter.viewholder.CollectionViewHolder
 import estyle.teabaike.entity.ContentEntity
 
 class CollectionAdapter :
-    BasePagedListAdapter<ContentEntity.DataEntity, CollectionViewHolder>(diffCallback) {
+    BasePagedListAdapter<ContentEntity, CollectionViewHolder>(diffCallback) {
 
-    val deleteMap by lazy { HashMap<Int, ContentEntity.DataEntity>() }
+    val deleteMap by lazy { HashMap<Int, ContentEntity>() }
     var isDeleteBoxVisible: Boolean = false
-    private val deleteList by lazy { arrayListOf<ContentEntity.DataEntity>() }
+    private val deleteList by lazy { arrayListOf<ContentEntity>() }
 
     // CheckBox可见
     fun setDeleteBoxVisibility(isDeleteBoxVisible: Boolean) {
@@ -38,7 +38,7 @@ class CollectionAdapter :
     }
 
     // 删除数据库中的数据
-    fun deleteData(): List<ContentEntity.DataEntity> {
+    fun deleteData(): List<ContentEntity> {
         deleteList.clear()
         val iterator = deleteMap.iterator()
         while (iterator.hasNext()) {
@@ -58,15 +58,15 @@ class CollectionAdapter :
     }
 
     // RecyclerView附属的比较新旧item差异的回调
-    private class ItemCallback : DiffUtil.ItemCallback<ContentEntity.DataEntity>() {
+    private class ItemCallback : DiffUtil.ItemCallback<ContentEntity>() {
         override fun areItemsTheSame(
-            oldItem: ContentEntity.DataEntity,
-            newItem: ContentEntity.DataEntity
+            oldItem: ContentEntity,
+            newItem: ContentEntity
         ): Boolean = oldItem === newItem
 
         override fun areContentsTheSame(
-            oldItem: ContentEntity.DataEntity,
-            newItem: ContentEntity.DataEntity
+            oldItem: ContentEntity,
+            newItem: ContentEntity
         ): Boolean = oldItem == newItem
     }
 

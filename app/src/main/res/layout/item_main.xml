@@ -5,7 +5,7 @@
 
         <variable
             name="main"
-            type="estyle.teabaike.entity.MainEntity.DataEntity" />
+            type="estyle.teabaike.entity.MainEntity" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

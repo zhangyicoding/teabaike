@@ -42,8 +42,8 @@ class MainActivity : BaseActivity() {
         viewModel.checkVersion()
             .`as`(DisposableConverter.dispose(this))
             .subscribe(object :
-                SnackbarObserver<VersionEntity.DataEntity>(main_drawer_layout) {
-                override fun onNext(it: VersionEntity.DataEntity) {
+                SnackbarObserver<VersionEntity>(main_drawer_layout) {
+                override fun onNext(it: VersionEntity) {
                     super.onNext(it)
                     if (VersionUtil.needUpdate(this@MainActivity, it.version_code)) {
                         UpdateDialogFragment.newInstance(it)

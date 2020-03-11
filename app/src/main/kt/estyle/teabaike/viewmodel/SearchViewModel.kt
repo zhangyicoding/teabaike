@@ -2,7 +2,7 @@ package estyle.teabaike.viewmodel
 
 import android.app.Application
 import estyle.base.BaseViewModel
-import estyle.base.rxjava.ErrorMessageConsumer
+import estyle.base.rxjava.ErrorCodeFunction
 import estyle.base.rxjava.SchedulersTransformer
 import estyle.teabaike.datasource.net.SearchService
 import estyle.teabaike.entity.MainEntity
@@ -21,7 +21,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
 //            .inject(this)
 //    }
 
-    fun refresh(keyword: String): Observable<List<MainEntity.DataEntity>> {
+    fun refresh(keyword: String): Observable<List<MainEntity>> {
         page = 1
         return loadList(keyword, page)
     }
@@ -30,7 +30,6 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
 
     private fun loadList(keyword: String, page: Int) = NetworkUtil.service(SearchService::class.java)
         .getSearch(keyword, page)
-        .doOnNext(ErrorMessageConsumer())
-        .map { it.data }
+        .map(ErrorCodeFunction())
         .compose(SchedulersTransformer())
 }

@@ -19,9 +19,9 @@ class CollectionViewModel(application: Application) : BaseViewModel(application)
 //            .inject(this)
 //    }
 
-    private var collectionListBuilder: RxPagedListBuilder<Int, ContentEntity.DataEntity>? = null
+    private var collectionListBuilder: RxPagedListBuilder<Int, ContentEntity>? = null
 
-    fun refresh(): Observable<PagedList<ContentEntity.DataEntity>> {
+    fun refresh(): Observable<PagedList<ContentEntity>> {
         if (collectionListBuilder == null) {
             collectionListBuilder = RxPagedListBuilder(
                 TeaBaikeDatabase.INSTANCE.collectionDao()
@@ -35,7 +35,7 @@ class CollectionViewModel(application: Application) : BaseViewModel(application)
         return collectionListBuilder!!.buildObservable()
     }
 
-    fun deleteItems(items: List<ContentEntity.DataEntity>) = TeaBaikeDatabase.INSTANCE
+    fun deleteItems(items: List<ContentEntity>) = TeaBaikeDatabase.INSTANCE
         .collectionDao()
         .delete(items)
         .toObservable()

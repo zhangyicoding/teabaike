@@ -17,7 +17,7 @@ class CollectionViewHolder(
     layoutId: Int,
     private val adapter: CollectionAdapter
 ) :
-    BaseViewHolder<ContentEntity.DataEntity, ItemCollectionBinding>(parent, layoutId) {
+    BaseViewHolder<ContentEntity, ItemCollectionBinding>(parent, layoutId) {
 
     override fun create() {
         super.create()
@@ -55,7 +55,7 @@ class CollectionViewHolder(
             })
     }
 
-    override fun bind(currentItem: ContentEntity.DataEntity) {
+    override fun bind(currentItem: ContentEntity) {
         binding.collection = currentItem
         itemView.delete_box.visibility =
             if (adapter.isDeleteBoxVisible) View.VISIBLE else View.INVISIBLE

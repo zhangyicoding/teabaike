@@ -107,9 +107,9 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
     override fun onLoad() {
         viewModel.moreList(type)
             .`as`(DisposableConverter.dispose(this))
-            .subscribe(object : SnackbarObserver<List<MainEntity.DataEntity>>(recycler_view) {
+            .subscribe(object : SnackbarObserver<List<MainEntity>>(recycler_view) {
 
-                override fun onNext(it: List<MainEntity.DataEntity>) {
+                override fun onNext(it: List<MainEntity>) {
                     super.onNext(it)
                     adapter.load(it)
                     recycler_view.isLoading = false

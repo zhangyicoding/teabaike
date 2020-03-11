@@ -5,7 +5,7 @@
 
         <variable
             name="content"
-            type="estyle.teabaike.entity.ContentEntity.DataEntity" />
+            type="estyle.teabaike.entity.ContentEntity" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"

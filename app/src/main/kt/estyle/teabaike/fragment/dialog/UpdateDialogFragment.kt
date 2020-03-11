@@ -10,7 +10,7 @@ import estyle.teabaike.entity.VersionEntity
 class UpdateDialogFragment : BaseDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val version = arguments!!.getParcelable<VersionEntity.DataEntity>("version")
+        val version = arguments!!.getParcelable<VersionEntity>("version")
         return AlertDialog.Builder(context)
             .setTitle("发现新版本")
             .setMessage(version?.info)
@@ -24,7 +24,7 @@ class UpdateDialogFragment : BaseDialogFragment() {
     }
 
     companion object {
-        fun newInstance(version: VersionEntity.DataEntity) = UpdateDialogFragment().apply {
+        fun newInstance(version: VersionEntity) = UpdateDialogFragment().apply {
             arguments = Bundle().apply {
                 putParcelable("version", version)
             }

@@ -54,9 +54,9 @@ class SearchActivity : BaseActivity(), PagingRecyclerView.OnLoadListener {
     override fun onLoad() {
         viewModel.loadMore(keyword)
             .`as`(DisposableConverter.dispose(this))
-            .subscribe(object : SnackbarObserver<List<MainEntity.DataEntity>>(recycler_view) {
+            .subscribe(object : SnackbarObserver<List<MainEntity>>(recycler_view) {
 
-                override fun onNext(it: List<MainEntity.DataEntity>) {
+                override fun onNext(it: List<MainEntity>) {
                     super.onNext(it)
                     adapter.load(it)
                     recycler_view.isLoading = false
@@ -74,8 +74,8 @@ class SearchActivity : BaseActivity(), PagingRecyclerView.OnLoadListener {
         viewModel.refresh(keyword)
             .`as`(DisposableConverter.dispose(this))
             .subscribe(object :
-                RefreshObserver<List<MainEntity.DataEntity>>(swipe_refresh_layout) {
-                override fun onNext(it: List<MainEntity.DataEntity>) {
+                RefreshObserver<List<MainEntity>>(swipe_refresh_layout) {
+                override fun onNext(it: List<MainEntity>) {
                     super.onNext(it)
                     adapter.refresh(it)
                 }

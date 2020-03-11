@@ -16,13 +16,13 @@ class MainHeadlineViewHolder(
     layoutId: Int,
     private val adapter: BaseAdapter<*, *>
 ) :
-    BaseViewHolder<List<HeadlineEntity.DataEntity>, ViewHeadlineBinding>(
+    BaseViewHolder<List<HeadlineEntity>, ViewHeadlineBinding>(
         parent,
         layoutId
     ), DefaultLifecycleObserver {
 
     // todo 如何优雅地使用databinding
-    override fun bind(currentItem: List<HeadlineEntity.DataEntity>) {
+    override fun bind(currentItem: List<HeadlineEntity>) {
         itemView.dots_view.dotCount = currentItem.size
         itemView.headline_text_view.text = currentItem[0].title
         itemView.banner_view_old.setOnBannerSelectedListener { position ->

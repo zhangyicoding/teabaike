@@ -87,8 +87,8 @@ class CollectionActivity : BaseActivity() {
         viewModel.refresh()
             .`as`(DisposableConverter.dispose(this))
             .subscribe(object :
-                RefreshObserver<PagedList<ContentEntity.DataEntity>>(swipe_refresh_layout) {
-                override fun onNext(it: PagedList<ContentEntity.DataEntity>) {
+                RefreshObserver<PagedList<ContentEntity>>(swipe_refresh_layout) {
+                override fun onNext(it: PagedList<ContentEntity>) {
                     super.onNext(it)
                     adapter.submitList(it)
                 }
@@ -150,9 +150,9 @@ class CollectionActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        swipe_refresh_layout.setOnRefreshListener(null)
         LocalBroadcastManager.getInstance(this)
             .unregisterReceiver(deleteReceiver)
-        swipe_refresh_layout.setOnRefreshListener(null)
     }
 
     inner class DeleteReceiver : BroadcastReceiver() {
