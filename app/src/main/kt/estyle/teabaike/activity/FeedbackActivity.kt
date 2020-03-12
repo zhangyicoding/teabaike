@@ -7,13 +7,13 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import estyle.base.BaseActivity
 import estyle.base.fragment.dialog.ProgressDialogFragment
-import estyle.base.rxjava.observer.DialogObserver
 import estyle.base.rxjava.DisposableConverter
+import estyle.base.rxjava.observer.DialogObserver
 import estyle.teabaike.R
 import estyle.teabaike.databinding.ActivityFeedbackBinding
 import estyle.teabaike.viewmodel.FeedbackViewModel
@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_feedback.*
 class FeedbackActivity : BaseActivity(), View.OnFocusChangeListener {
 
     private lateinit var binding: ActivityFeedbackBinding
-    private val viewModel by lazy { ViewModelProviders.of(this)[FeedbackViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(this).get(FeedbackViewModel::class.java) }
     private val progressDialog by lazy { ProgressDialogFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

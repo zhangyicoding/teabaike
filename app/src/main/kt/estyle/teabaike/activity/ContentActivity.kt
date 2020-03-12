@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
@@ -36,7 +36,7 @@ class ContentActivity : BaseActivity() {
     // TODO 此处使用val不可以懒加载
     // 但是在HeadlineHeaderView中就可以
     private lateinit var binding: ActivityContentBinding
-    private val viewModel by lazy { ViewModelProviders.of(this)[ContentViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(this).get(ContentViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

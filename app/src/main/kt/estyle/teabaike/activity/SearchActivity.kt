@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_search.*
 class SearchActivity : BaseActivity(), PagingRecyclerView.OnLoadListener {
 
 
-    private val viewModel by lazy { ViewModelProviders.of(this)[SearchViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(this).get(SearchViewModel::class.java) }
 
     private val adapter by lazy { SearchAdapter() }
 

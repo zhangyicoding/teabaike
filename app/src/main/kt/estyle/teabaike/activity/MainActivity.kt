@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @Route(path = RoutePath.LAUNCHER_MAIN)
 class MainActivity : BaseActivity() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this)[MainViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
 
     private val toggle by lazy { ActionBarDrawerToggle(this, main_drawer_layout, toolbar, 0, 0) }
 

@@ -60,9 +60,10 @@ dependencies {
     api "com.google.android.material:material:${rootProject.ext.material_version}"
 
     // Lifecycle
-    api "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.lifecycle_version}"
-    api "androidx.lifecycle:lifecycle-common-java8:${rootProject.ext.lifecycle_version}"
+    api "androidx.lifecycle:lifecycle-viewmodel-savedstate:${rootProject.ext.lifecycle_version}"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.ext.lifecycle_version}"
     api "androidx.lifecycle:lifecycle-reactivestreams-ktx:${rootProject.ext.lifecycle_version}"
+    api "androidx.lifecycle:lifecycle-common-java8:${rootProject.ext.lifecycle_version}"
 
     // Paging
     api "androidx.paging:paging-runtime-ktx:${rootProject.ext.paging_version}"

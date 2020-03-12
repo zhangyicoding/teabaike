@@ -7,7 +7,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import estyle.base.fragment.BaseFragment
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.RefreshObserver
@@ -27,7 +27,7 @@ import permissions.dispatcher.RuntimePermissions
 @RuntimePermissions
 class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
 
-    private val viewModel by lazy { ViewModelProviders.of(this)[MainListViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(this).get(MainListViewModel::class.java) }
     private lateinit var adapter: MainListAdapter
 
     val title: String by lazy { arguments!!.getString(TITLE)!! }

@@ -7,7 +7,7 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.paging.PagedList
 import estyle.base.BaseActivity
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_collection.*
 
 class CollectionActivity : BaseActivity() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this)[CollectionViewModel::class.java] }
+    private val viewModel by lazy { ViewModelProvider(this).get(CollectionViewModel::class.java) }
 
     private val adapter by lazy { CollectionAdapter() }
 
