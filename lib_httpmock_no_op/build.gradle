@@ -26,5 +26,5 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api "com.squareup.okhttp3:okhttp:3.12.0"
-    api project(path: ':lib_httpmock_common_no_op')
+    api project(path: ':lib_httpmock_annotation')
 }

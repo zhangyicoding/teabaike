@@ -5,7 +5,6 @@ dependencies {
 
     implementation "com.google.auto.service:auto-service:1.0-rc5"
     implementation "com.squareup:javapoet:1.11.1"
-    implementation project(path: ':lib_httpmock_annotation')
     implementation project(path: ':lib_httpmock_common')
     implementation "com.google.code.gson:gson:2.8.5"
 }

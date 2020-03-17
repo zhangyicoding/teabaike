@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/lib_httpmock" />
             <option value="$PROJECT_DIR$/lib_httpmock_annotation" />
             <option value="$PROJECT_DIR$/lib_httpmock_common" />
-            <option value="$PROJECT_DIR$/lib_httpmock_common_no_op" />
             <option value="$PROJECT_DIR$/lib_httpmock_no_op" />
             <option value="$PROJECT_DIR$/lib_httpmock_processor" />
           </set>
