@@ -18,7 +18,7 @@ class SplashActivity : BaseActivity() {
             .`as`(DisposableConverter.dispose(this))
             .subscribe { isFirstLogin ->
                 if (isFirstLogin) {
-                    aRouter.build(RoutePath.LAUNCHER_WELCOME).navigation()
+                    aRouter.build(RoutePath.LAUNCHER_GUIDE).navigation()
                 } else {
                     aRouter.build(RoutePath.LAUNCHER_MAIN).navigation()
                 }

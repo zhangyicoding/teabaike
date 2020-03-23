@@ -1,8 +1,8 @@
 package estyle.teabaike.test
 
 import androidx.test.rule.ActivityTestRule
+import estyle.teabaike.activity.GuideActivity
 import estyle.teabaike.rule.RxJavaTestRule
-import estyle.teabaike.activity.WelcomeActivity
 import org.junit.Before
 import org.junit.Rule
 
@@ -14,9 +14,9 @@ abstract class BaseTest {
 
     @Rule
     @JvmField
-    val activityRule = ActivityTestRule(WelcomeActivity::class.java)
+    val activityRule = ActivityTestRule(GuideActivity::class.java)
 
-    protected lateinit var activity: WelcomeActivity
+    protected lateinit var activity: GuideActivity
 
     @Before
     fun before() {

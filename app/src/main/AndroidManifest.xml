@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.WelcomeActivity"
+            android:name=".activity.GuideActivity"
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".activity.MainActivity"

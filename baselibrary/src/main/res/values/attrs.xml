@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="DotView">
+        <attr name="dotMargin" format="dimension|reference" />
+        <attr name="defaultColor" format="color|reference" />
+        <attr name="selectColor" format="color|reference" />
+    </declare-styleable>
+</resources>

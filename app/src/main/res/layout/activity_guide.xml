@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.WelcomeActivity">
+    tools:context=".activity.GuideActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/welcome_view_pager"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/guide_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
 
     <estyle.teabaike.widget.DotsView
         android:id="@+id/dots_view"
