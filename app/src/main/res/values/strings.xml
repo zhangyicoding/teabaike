@@ -1,4 +1,12 @@
 <resources>
+    <string-array name="main_title">
+        <item>头条</item>
+        <item>百科</item>
+        <item>咨询</item>
+        <item>经营</item>
+        <item>数据</item>
+    </string-array>
+
     <string name="app_name">茶百科</string>
     <string name="collection">收藏夹</string>
     <string name="about_app">关于客户端</string>

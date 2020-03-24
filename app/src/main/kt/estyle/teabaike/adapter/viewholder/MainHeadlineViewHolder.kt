@@ -52,11 +52,13 @@ class MainHeadlineViewHolder(
         itemView.banner_view_old.isCircling = false
     }
 
-    override fun onStart(owner: LifecycleOwner) {
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
         start()
     }
 
-    override fun onStop(owner: LifecycleOwner) {
+    override fun onPause(owner: LifecycleOwner) {
+        super.onPause(owner)
         stop()
     }
 

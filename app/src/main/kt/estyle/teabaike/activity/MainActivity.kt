@@ -6,18 +6,23 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.tabs.TabLayoutMediator
 import estyle.base.BaseActivity
 import estyle.base.rxjava.DisposableConverter
 import estyle.base.rxjava.observer.SnackbarObserver
 import estyle.base.util.VersionUtil
 import estyle.teabaike.R
-import estyle.teabaike.adapter.MainPagerAdapter
 import estyle.teabaike.config.RoutePath
+import estyle.teabaike.config.Url
 import estyle.teabaike.entity.VersionEntity
+import estyle.teabaike.fragment.MainFragment
 import estyle.teabaike.fragment.dialog.UpdateDialogFragment
 import estyle.teabaike.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 @Route(path = RoutePath.LAUNCHER_MAIN)
 class MainActivity : BaseActivity() {
@@ -33,8 +38,15 @@ class MainActivity : BaseActivity() {
         toggle.syncState()
         main_drawer_layout.addDrawerListener(toggle)
 
-        main_view_pager.adapter = MainPagerAdapter(supportFragmentManager)
-        tab_layout.setupWithViewPager(main_view_pager)
+        main_view_pager.also {
+            // todo 行为古怪，学习rv缓存机制势在必行
+            (it.getChildAt(0) as RecyclerView).setItemViewCacheSize(4)
+            it.adapter = MainPagerAdapter()
+            val titles = resources.getStringArray(R.array.main_title)
+            TabLayoutMediator(tab_layout, it) { tab, position ->
+                tab.text = titles[position]
+            }.attach()
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -64,6 +76,21 @@ class MainActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    private inner class MainPagerAdapter : FragmentStateAdapter(this) {
+
+        private val fragmentList by lazy { ArrayList<MainFragment>() }
+
+        init {
+            Url.TYPES.forEach {
+                fragmentList.add(MainFragment.newInstance(it))
+            }
+        }
+
+        override fun getItemCount() = fragmentList.size
+
+        override fun createFragment(position: Int) = fragmentList[position]
     }
 
     companion object {

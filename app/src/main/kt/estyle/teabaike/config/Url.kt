@@ -4,8 +4,7 @@ object Url {
 
     const val BASE_URL = "http://sns.maimaicha.com/"
 
-    val TITLES = arrayOf("头条", "百科", "咨询", "经营", "数据")
-    val TYPES = arrayOf(TITLES[0], "16", "52", "53", "54")
+    val TYPES = arrayOf("0", "1", "2", "3", "4")
 
     // 频道接口
     const val CHANNEL_URL =
@@ -19,10 +18,6 @@ object Url {
     //首页幻灯片数据路径
     const val HEADLINE_HEADER_URL =
         "api?apikey=b4f4ee31a8b9acc866ef2afb754c33e6&format=json&method=news.getSlideshow"
-
-    //头条数据
-    const val HEADLINE_URL =
-        "api?apikey=b4f4ee31a8b9acc866ef2afb754c33e6&format=json&method=news.getHeadlines&row=10"
 
     //内容详情页，id为对应文章id，主界面Json数据中获取
     const val CONTENT_URL =

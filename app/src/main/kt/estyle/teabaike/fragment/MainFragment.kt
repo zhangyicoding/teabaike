@@ -30,8 +30,7 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
     private val viewModel by lazy { ViewModelProvider(this).get(MainListViewModel::class.java) }
     private lateinit var adapter: MainListAdapter
 
-    val title: String by lazy { arguments!!.getString(TITLE)!! }
-    private val type by lazy { arguments!!.getString(TYPE)!! }
+    private val type by lazy { arguments!!.getString(EXTRA_TYPE)!! }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -141,16 +140,10 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
 
     companion object {
 
-        private const val TITLE = "title"
-        private const val TYPE = "type"
+        private const val EXTRA_TYPE = "type"
 
-        fun newInstance(title: String, type: String?): MainFragment {
-            return MainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(TITLE, title)
-                    putString(TYPE, type)
-                }
-            }
+        fun newInstance(type: String?) = MainFragment().apply {
+            arguments = Bundle().apply { putString(EXTRA_TYPE, type) }
         }
     }
 }
