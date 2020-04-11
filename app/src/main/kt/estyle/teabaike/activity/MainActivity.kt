@@ -39,13 +39,12 @@ class MainActivity : BaseActivity() {
         main_drawer_layout.addDrawerListener(toggle)
 
         main_view_pager.also {
-            // todo 行为古怪，学习rv缓存机制势在必行
-            (it.getChildAt(0) as RecyclerView).setItemViewCacheSize(4)
-            it.adapter = MainPagerAdapter()
             val titles = resources.getStringArray(R.array.main_title)
+            (it.getChildAt(0) as RecyclerView).setItemViewCacheSize(titles.size - 1)
             TabLayoutMediator(tab_layout, it) { tab, position ->
                 tab.text = titles[position]
             }.attach()
+            it.adapter = MainPagerAdapter()
         }
     }
 
@@ -83,9 +82,7 @@ class MainActivity : BaseActivity() {
         private val fragmentList by lazy { ArrayList<MainFragment>() }
 
         init {
-            Url.TYPES.forEach {
-                fragmentList.add(MainFragment.newInstance(it))
-            }
+            Url.TYPES.forEach { fragmentList.add(MainFragment.newInstance(it)) }
         }
 
         override fun getItemCount() = fragmentList.size
