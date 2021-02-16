@@ -4,8 +4,7 @@ import android.app.Application
 import estyle.base.BaseViewModel
 import estyle.base.rxjava.ErrorCodeFunction
 import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.net.FeedbackService
-import estyle.teabaike.util.NetworkUtil
+import estyle.teabaike.datasource.http.service.FeedbackService
 
 class FeedbackViewModel(application: Application) : BaseViewModel(application) {
 
@@ -17,7 +16,7 @@ class FeedbackViewModel(application: Application) : BaseViewModel(application) {
 //            .inject(this)
 //    }
 
-    fun feedback(title: String, content: String) = NetworkUtil.service(FeedbackService::class.java)
+    fun feedback(title: String, content: String) = HttpManager.service(FeedbackService::class.java)
         .postFeedback(title, content)
         .map(ErrorCodeFunction())
         .compose(SchedulersTransformer())

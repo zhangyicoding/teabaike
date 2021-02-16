@@ -4,8 +4,7 @@ import android.app.Application
 import estyle.base.BaseViewModel
 import estyle.base.rxjava.ErrorCodeFunction
 import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.net.MainService
-import estyle.teabaike.util.NetworkUtil
+import estyle.teabaike.datasource.http.service.MainService
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
@@ -17,7 +16,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
 //            .inject(this)
 //    }
 
-    fun checkVersion() = NetworkUtil.service(MainService::class.java)
+    fun checkVersion() = HttpManager.service(MainService::class.java)
         .getLatestVersion()
         .map(ErrorCodeFunction())
         .compose(SchedulersTransformer())

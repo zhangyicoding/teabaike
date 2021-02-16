@@ -1,4 +1,4 @@
-package estyle.teabaike.datasource.net
+package estyle.teabaike.datasource.http.service
 
 import com.estyle.httpmock.annotation.HttpMock
 import estyle.base.entity.HttpEntity

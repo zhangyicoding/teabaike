@@ -4,9 +4,8 @@ import android.app.Application
 import estyle.base.BaseViewModel
 import estyle.base.rxjava.ErrorCodeFunction
 import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.net.MainService
+import estyle.teabaike.datasource.http.service.MainService
 import estyle.teabaike.entity.MainEntity
-import estyle.teabaike.util.NetworkUtil
 import io.reactivex.Observable
 
 class MainListViewModel(application: Application) : BaseViewModel(application) {
@@ -22,7 +21,7 @@ class MainListViewModel(application: Application) : BaseViewModel(application) {
 //    }
 
     // 加载头条数据
-    fun loadHeadline() = NetworkUtil.service(MainService::class.java)
+    fun loadHeadline() = HttpManager.service(MainService::class.java)
         .getHeadline()
         .map(ErrorCodeFunction())
         .compose(SchedulersTransformer())
@@ -37,7 +36,7 @@ class MainListViewModel(application: Application) : BaseViewModel(application) {
     fun moreList(type: String) = loadList(type, ++page)
 
     private fun loadList(type: String, page: Int) =
-        NetworkUtil.service(MainService::class.java)
+        HttpManager.service(MainService::class.java)
             .getList(type, page)
             .map(ErrorCodeFunction())
             .compose(SchedulersTransformer())

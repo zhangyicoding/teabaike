@@ -1,8 +1,8 @@
 package estyle.teabaike
 
 import estyle.base.BaseApplication
-import estyle.teabaike.config.Url.BASE_URL
-import estyle.teabaike.util.NetworkUtil
+import estyle.teabaike.datasource.database.DatabaseManager
+import estyle.teabaike.datasource.http.HttpManager
 import estyle.teabaike.widget.ViewManager
 
 class TeaBaikeApplication : BaseApplication() {
@@ -10,8 +10,8 @@ class TeaBaikeApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        NetworkUtil.init(this, BASE_URL)
-        TeaBaikeDatabase.init(this)
+        HttpManager.init(this)
+        DatabaseManager.init(this)
         ViewManager.init(this, R.color.colorAccent)
     }
 }

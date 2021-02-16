@@ -1,8 +1,8 @@
 package estyle.teabaike.test
 
 import androidx.lifecycle.ViewModelProviders
-import estyle.teabaike.TeaBaikeDatabase
-import estyle.teabaike.datasource.database.CollectionDao
+import estyle.teabaike.datasource.database.DatabaseManager
+import estyle.teabaike.datasource.database.dao.CollectionDao
 import estyle.teabaike.entity.ContentEntity
 import estyle.teabaike.viewmodel.ContentViewModel
 import org.junit.After
@@ -13,7 +13,7 @@ class ContentActivityTest : BaseTest() {
 
     private lateinit var viewModel: ContentViewModel
 
-    private lateinit var db: TeaBaikeDatabase
+    private lateinit var db: DatabaseManager
     private lateinit var dao: CollectionDao
 
     override fun init() {

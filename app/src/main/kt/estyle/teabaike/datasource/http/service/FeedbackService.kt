@@ -1,4 +1,4 @@
-package estyle.teabaike.datasource.net
+package estyle.teabaike.datasource.http.service
 
 import com.estyle.httpmock.annotation.HttpMock
 import estyle.base.entity.HttpEntity
@@ -13,5 +13,8 @@ interface FeedbackService {
     @HttpMock(fileName = "feedback.json")
     @FormUrlEncoded
     @POST(Url.FEEDBACK_URL)
-    fun postFeedback(@Field(Url.FEEDBACK_TITLE) title: String, @Field(Url.FEEDBACK_CONTENT) content: String): Observable<HttpEntity<String>>
+    fun postFeedback(
+        @Field(Url.FEEDBACK_TITLE) title: String,
+        @Field(Url.FEEDBACK_CONTENT) content: String
+    ): Observable<HttpEntity<String>>
 }

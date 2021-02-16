@@ -1,4 +1,4 @@
-package estyle.teabaike.datasource.net
+package estyle.teabaike.datasource.http.service
 
 import com.estyle.httpmock.annotation.HttpMock
 import estyle.base.entity.HttpEntity
@@ -14,7 +14,10 @@ interface MainService {
 
     @HttpMock(fileName = "list.json")
     @GET(Url.CHANNEL_URL)
-    fun getList(@Query(Url.TYPE) type: String, @Query(Url.PAGE) page: Int): Observable<HttpEntity<List<MainEntity>>>
+    fun getList(
+        @Query(Url.TYPE) type: String,
+        @Query(Url.PAGE) page: Int
+    ): Observable<HttpEntity<List<MainEntity>>>
 
     @HttpMock(fileName = "headline.json")
     @GET(Url.HEADLINE_HEADER_URL)

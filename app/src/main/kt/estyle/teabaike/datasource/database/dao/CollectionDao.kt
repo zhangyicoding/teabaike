@@ -1,4 +1,4 @@
-package estyle.teabaike.datasource.database
+package estyle.teabaike.datasource.database.dao
 
 import androidx.paging.DataSource
 import androidx.room.Dao

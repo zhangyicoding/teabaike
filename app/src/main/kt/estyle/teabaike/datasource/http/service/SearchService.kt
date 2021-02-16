@@ -1,4 +1,4 @@
-package estyle.teabaike.datasource.net
+package estyle.teabaike.datasource.http.service
 
 import com.estyle.httpmock.annotation.HttpMock
 import estyle.base.entity.HttpEntity
@@ -12,5 +12,8 @@ interface SearchService {
 
     @HttpMock(fileName = "list.json")
     @GET(Url.SEARCH_URL)
-    fun getSearch(@Query(Url.SEARCH) keyword: String, @Query(Url.PAGE) page: Int): Observable<HttpEntity<List<MainEntity>>>
+    fun getSearch(
+        @Query(Url.SEARCH) keyword: String,
+        @Query(Url.PAGE) page: Int
+    ): Observable<HttpEntity<List<MainEntity>>>
 }

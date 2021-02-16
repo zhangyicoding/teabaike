@@ -4,10 +4,10 @@ import android.app.Application
 import estyle.base.BaseViewModel
 import estyle.base.rxjava.ErrorCodeFunction
 import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.TeaBaikeDatabase
-import estyle.teabaike.datasource.net.ContentService
+import estyle.teabaike.datasource.database.DatabaseManager
+import estyle.teabaike.datasource.http.HttpManager
+import estyle.teabaike.datasource.http.service.ContentService
 import estyle.teabaike.entity.ContentEntity
-import estyle.teabaike.util.NetworkUtil
 
 class ContentViewModel(application: Application) : BaseViewModel(application) {
 
@@ -19,12 +19,12 @@ class ContentViewModel(application: Application) : BaseViewModel(application) {
 //            .inject(this)
 //    }
 
-    fun refresh(id: Long) = NetworkUtil.service(ContentService::class.java)
+    fun refresh(id: Long) = HttpManager.service(ContentService::class.java)
         .getContent(id)
         .map(ErrorCodeFunction())
         .compose(SchedulersTransformer())
 
-    fun collect(content: ContentEntity) = TeaBaikeDatabase.INSTANCE
+    fun collect(content: ContentEntity) = DatabaseManager.INSTANCE
         .collectionDao()
         .insert(content)
         .toObservable()
