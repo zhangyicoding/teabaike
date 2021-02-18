@@ -2,22 +2,22 @@ package estyle.teabaike.viewmodel
 
 import android.app.Application
 import estyle.base.BaseViewModel
-import estyle.base.rxjava.ErrorCodeFunction
-import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.http.service.MainService
+import estyle.teabaike.datasource.MainDataSource
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
-//    @Inject
-//    lateinit var dataSource: MainDataSource
+    //    @Inject
+    lateinit var dataSource: MainDataSource
 
-//    init {
+    init {
+        dataSource = MainDataSource()
+
 //        InjectUtil.dataSourceComponent()
 //            .inject(this)
-//    }
+    }
 
-    fun checkVersion() = HttpManager.service(MainService::class.java)
-        .getLatestVersion()
-        .map(ErrorCodeFunction())
-        .compose(SchedulersTransformer())
+    /**
+     * 检查版本
+     */
+    fun checkVersion() = dataSource.checkVersion()
 }

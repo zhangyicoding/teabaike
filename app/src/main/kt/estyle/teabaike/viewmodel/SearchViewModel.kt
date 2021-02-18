@@ -2,9 +2,7 @@ package estyle.teabaike.viewmodel
 
 import android.app.Application
 import estyle.base.BaseViewModel
-import estyle.base.rxjava.ErrorCodeFunction
-import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.http.service.SearchService
+import estyle.teabaike.datasource.SearchDataSource
 import estyle.teabaike.entity.MainEntity
 import io.reactivex.Observable
 
@@ -12,24 +10,22 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
 
     private var page = 1
 
-//    @Inject
-//    lateinit var dataSource: SearchDataSource
+    //    @Inject
+    lateinit var dataSource: SearchDataSource
 
-//    init {
+    init {
+        dataSource = SearchDataSource()
+
 //        InjectUtil.dataSourceComponent()
 //            .inject(this)
-//    }
+    }
 
     fun refresh(keyword: String): Observable<List<MainEntity>> {
         page = 1
-        return loadList(keyword, page)
+        return dataSource.loadList(keyword, page)
     }
 
-    fun loadMore(keyword: String) = loadList(keyword, page++)
+    fun loadMore(keyword: String) = dataSource.loadList(keyword, ++page)
 
-    private fun loadList(keyword: String, page: Int) =
-        HttpManager.service(SearchService::class.java)
-            .getSearch(keyword, page)
-            .map(ErrorCodeFunction())
-            .compose(SchedulersTransformer())
+
 }

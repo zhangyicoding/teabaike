@@ -2,31 +2,28 @@ package estyle.teabaike.viewmodel
 
 import android.app.Application
 import estyle.base.BaseViewModel
-import estyle.base.rxjava.ErrorCodeFunction
-import estyle.base.rxjava.SchedulersTransformer
-import estyle.teabaike.datasource.database.DatabaseManager
-import estyle.teabaike.datasource.http.HttpManager
-import estyle.teabaike.datasource.http.service.ContentService
+import estyle.teabaike.datasource.ContentDataSource
 import estyle.teabaike.entity.ContentEntity
 
 class ContentViewModel(application: Application) : BaseViewModel(application) {
 
-//    @Inject
-//    lateinit var dataSource: ContentDataSource
+    //    @Inject
+    lateinit var dataSource: ContentDataSource
 
-//    init {
+    init {
+        dataSource = ContentDataSource()
+
 //        InjectUtil.dataSourceComponent()
 //            .inject(this)
-//    }
+    }
 
-    fun refresh(id: Long) = HttpManager.service(ContentService::class.java)
-        .getContent(id)
-        .map(ErrorCodeFunction())
-        .compose(SchedulersTransformer())
+    /**
+     * 刷新
+     */
+    fun refresh(id: Long) = dataSource.refresh(id)
 
-    fun collect(content: ContentEntity) = DatabaseManager.INSTANCE
-        .collectionDao()
-        .insert(content)
-        .toObservable()
-        .compose(SchedulersTransformer())
+    /**
+     * 收藏
+     */
+    fun collect(content: ContentEntity) = dataSource.collect(content)
 }
