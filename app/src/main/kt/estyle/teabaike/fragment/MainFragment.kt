@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import estyle.base.fragment.BaseFragment
 import estyle.base.rxjava.DisposableConverter
@@ -19,7 +20,6 @@ import estyle.teabaike.adapter.MainListAdapter
 import estyle.teabaike.config.Url
 import estyle.teabaike.entity.MainEntity
 import estyle.teabaike.viewmodel.MainListViewModel
-import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_main.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
@@ -58,6 +58,12 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
                 lifecycle.addObserver(holder)
             }
         }
+
+        // 分别接收头条数据和刷新列表数据
+        viewModel.refreshList.observe(this, Observer { adapter.refresh(it) })
+        if (TextUtils.equals(type, Url.TYPES[0])) {
+            viewModel.headline.observe(this, Observer { adapter.headlineList = it })
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -78,21 +84,7 @@ class MainFragment : BaseFragment(), PagingRecyclerView.OnLoadListener {
 
     // SwipeRefreshLayout
     private fun refresh() {
-        val refreshListObservable = viewModel.refreshList(type)
-            .doOnNext { adapter.refresh(it) }
-
-        var observable: Observable<out List<Any>> = refreshListObservable
-
-        // 头条
-        if (TextUtils.equals(type, Url.TYPES[0])) {
-            val loadHeadlineObservable = viewModel.loadHeadline()
-                .doOnNext { adapter.headlineList = it }
-            observable = Observable.mergeDelayError(refreshListObservable, loadHeadlineObservable)
-        }
-
-        // 当所有网络请求全部结束后，更新刷新状态
-        observable
-            .map {}// TODO 原始数据类型会报错，必须转成其它类型？空的也可以？？？醉了
+        viewModel.refresh(type)
             .`as`(DisposableConverter.dispose(this))
             .subscribe(object : RefreshObserver<Any>(swipe_refresh_layout) {
                 override fun onError(e: Throwable) {
